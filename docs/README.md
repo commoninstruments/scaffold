@@ -22,6 +22,10 @@ It is not a generic starter guide. It reflects the conventions that are already 
 
 - [Getting Started](./getting-started.md)
 - [Stack Decisions](./reference/stack-decisions.md)
+- [Architecture Defaults](./reference/architecture-defaults.md)
+- [Repo Archetypes](./reference/repo-archetypes.md)
+- [Package Boundaries](./reference/package-boundaries.md)
+- [Deployment Defaults](./reference/deployment-defaults.md)
 - [Default Dependencies](./reference/default-dependencies.md)
 - [Config Snippets](./reference/config-snippets.md)
 - [UI Projects](./reference/ui-projects.md)

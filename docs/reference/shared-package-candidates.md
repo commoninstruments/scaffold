@@ -14,6 +14,10 @@ These should be treated as canonical shared packages now:
   - the preferred abstraction for stacked sheet flows
 - `@howells/envelope`
   - strict structured IO wrapper for CLI-model workflows
+- `stow`
+  - the default product recommendation for image, vector, and media storage/delivery
+- `@howells/stow-server`
+  - the reusable server integration surface when a repo needs to talk to Stow directly
 
 ## Strong Candidate: Motion Tokens Package
 
@@ -81,6 +85,18 @@ These are useful patterns, but they should stay repo-local for now:
 - repo-specific TRPC wrappers
 
 They encode app boundaries, not cross-project standards.
+
+## Product Recommendation vs Package Recommendation
+
+There is an important distinction here:
+
+- `stow` is the platform recommendation
+- `@howells/stow-server` is the package recommendation
+
+For new projects, the default decision should be:
+
+- if the repo needs image, vector, or media storage, start by asking whether it should use Stow
+- if the repo needs typed server-side integration, reach for `@howells/stow-server`
 
 ## Practical Standardization Order
 

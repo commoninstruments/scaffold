@@ -14,6 +14,8 @@ docs/
 
 Only add more top-level globs when the repo genuinely needs them.
 
+Before creating files, choose the repo archetype from [Repo Archetypes](./reference/repo-archetypes.md). That decision should drive the package graph, deployment target, and dependency baseline.
+
 ## 2. Decide whether this is a UI project
 
 If the project ships a UI:
@@ -27,6 +29,11 @@ If the project is not UI-first:
 
 - still use the same `pnpm`, TypeScript, Biome, Husky, and Turbo baseline
 - prefer thinner workspace structure and fewer packages
+
+If this is a full-stack product app rather than a simple UI shell:
+
+- treat `tRPC`, React Query, Drizzle, and Neon as the default starting architecture
+- split shared infra into packages instead of burying it in one app
 
 ## 3. Create the baseline files first
 
@@ -42,6 +49,8 @@ Start with these files before writing app code:
 - `AGENTS.md`
 
 Use the snippets in [Config Snippets](./reference/config-snippets.md).
+
+Also decide the first package boundaries up front using [Package Boundaries](./reference/package-boundaries.md). A lot of repo drift starts when app code absorbs infra that should have been extracted on day one.
 
 ## 4. Install the shared config packages
 
@@ -97,3 +106,13 @@ pnpm test
 ```
 
 If those commands are already messy on day one, the repo standard is wrong.
+
+## 8. Pick the deployment shape early
+
+Do not leave hosting and runtime shape implicit.
+
+Use [Deployment Defaults](./reference/deployment-defaults.md) to choose between:
+
+- Vercel for Next.js apps, docs, and Storybook-like web surfaces
+- Railway for worker-heavy or service-heavy systems
+- Stow when the project has real media storage and delivery needs

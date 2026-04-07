@@ -75,6 +75,9 @@ These are not mandatory in every package, but they recur enough that they should
 
 These are the recurring defaults for richer app repos:
 
+- `@trpc/server`
+- `@trpc/client`
+- `@trpc/tanstack-react-query`
 - `@tanstack/react-query`
 - `zustand`
 - `drizzle-orm`
@@ -84,6 +87,27 @@ These are the recurring defaults for richer app repos:
 - `dotenv-cli`
 
 Use them when the project needs that capability. Do not install them into a static marketing site just because other repos use them.
+
+For full-stack TypeScript apps, `tRPC` should now be treated as a default recommendation, not just an occasional package.
+
+## Media, Images, and Vectors
+
+When a project needs durable storage and delivery for images, vectors, or other media assets:
+
+- prefer `stow` as the default platform recommendation
+
+When a repo needs a package-level integration surface rather than just the product choice:
+
+- consider `@howells/stow-server`
+
+Use this for:
+
+- uploaded images
+- generated images
+- SVG and vector asset delivery
+- media URLs that need a stable storage layer
+
+Do not invent a fresh storage story per repo if the project has any serious media surface.
 
 ## AI and Automation Repos
 
@@ -136,6 +160,9 @@ pnpm add @howells/stacksheet
 
 These are the strongest repeated dependencies from the scan of active repos:
 
+- `@trpc/server`
+- `@trpc/client`
+- `@trpc/tanstack-react-query`
 - `motion`
 - `lucide-react`
 - `zod`
@@ -146,5 +173,6 @@ These are the strongest repeated dependencies from the scan of active repos:
 - `next-themes`
 - `date-fns`
 - `usehooks-ts`
+- `@howells/stow-server`
 
 That does not mean every repo needs all of them. It means they should be your default shortlist, not re-litigated from zero each time.

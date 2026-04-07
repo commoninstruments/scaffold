@@ -121,6 +121,18 @@ The packages that recur most often in UI work are:
 
 The detailed policy lives in [Default Dependencies](./default-dependencies.md).
 
+For media-heavy projects, there is also a platform-level default:
+
+- prefer `stow` for image, vector, and general media storage/delivery
+
+There is also a recurring architecture baseline for full-stack apps:
+
+- `tRPC` for typed API boundaries
+- React Query for server state
+- Drizzle plus Neon for persistence
+
+The detailed guidance lives in [Architecture Defaults](./architecture-defaults.md).
+
 ## Documentation
 
 If the repo needs a docs site:
