@@ -94,11 +94,48 @@ For new UI repos:
 - React 19
 - Tailwind CSS 4
 - Radix primitives
-- `motion` for animation
+- `motion` for animation, imported from `motion/react` in React code
 - Storybook for reusable exported components
 - `patternmode` as the upstream for shared UI packages
 
 This does not mean every product should look the same. It means structural decisions should be shared while brand and product expression stay local.
+
+## Client Data Fetching
+
+Use `@tanstack/react-query` for all client-side data fetching. No raw `fetch` in components.
+
+Rules:
+
+- Create a `lib/api.ts` with typed hooks (`usePersonas`, `useEvaluation`, etc.) wrapping `useQuery` and `useMutation`
+- Create a `lib/query-provider.tsx` client component with `QueryClientProvider`
+- Server Components fetch data directly from the database or internal packages — React Query is only for client components
+- Mutations should invalidate related query keys on success
+- SSE streams and one-shot fire-and-forget fetches are the only exceptions to using React Query
+
+Pattern:
+
+```ts
+// lib/api.ts
+export function usePersonas() {
+  return useQuery({
+    queryKey: ["personas"],
+    queryFn: () => apiFetch<Persona[]>("/api/personas"),
+  });
+}
+
+export function useUpdatePersona() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }) => apiFetch(`/api/personas/${id}`, { method: "PUT", ... }),
+    onSuccess: (_, { id }) => {
+      qc.invalidateQueries({ queryKey: ["personas"] });
+      qc.invalidateQueries({ queryKey: ["personas", id] });
+    },
+  });
+}
+```
+
+This replaces `useEffect` + `useState` + `fetch` patterns. React Query handles loading states, error states, caching, and cache invalidation.
 
 ## Dependency Standard
 
@@ -112,12 +149,23 @@ The packages that recur most often in UI work are:
 - `clsx`
 - `tailwind-merge`
 - `sonner`
+- `nuqs`
 - `next-themes`
 - `date-fns`
 - `@tanstack/react-query`
 - `usehooks-ts`
 - `@radix-ui/react-slot`
 - `@radix-ui/react-dialog`
+
+For agent-heavy visual product work, there is also a repeated development tool:
+
+- `agentation`
+
+The repeated package names across your Turborepos are also clear enough to treat as default boundaries, not accidental patterns:
+
+- first tier: `db`, `ui`, `typescript-config`, `tailwind-config`
+- second tier: `utils`, `trpc`, `motion`, `auth`, `ai`
+- optional but frequent: `assets`, `upload`, `storage`, `env`, `config`
 
 The detailed policy lives in [Default Dependencies](./default-dependencies.md).
 
