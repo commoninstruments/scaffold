@@ -33,8 +33,15 @@ packages/
   db/
   trpc/
   ui/
+  typescript-config/
+  tailwind-config/
   env/
   motion/
+  auth/             # when auth is shared
+  ai/               # only for repo-specific logic above @howells/ai
+  agents/           # when agent behavior is shared
+  mcp/              # when the repo exposes MCP tools or resources
+  assets/           # when multiple surfaces share assets
   upload/           # only if needed
 ```
 
@@ -64,6 +71,7 @@ apps/
   web/              # optional docs/system site
 packages/
   ui/
+  typescript-config/
   tailwind-config/
   motion/
   transition/
@@ -167,10 +175,11 @@ Default stack:
 
 - `tsx`
 - `zod`
-- `ai`
-- `@openrouter/ai-sdk-provider`
+- `@howells/ai`
 - Drizzle if persistence is needed
 - Stow if generated assets are stored
+- `agents`, `mcp`, or `cli` packages when the repo exposes reusable agent tooling
+- `@howells/srcfull` if browser or page-source ingestion is central
 
 These repos usually need stronger script and data-pipeline conventions than typical UI apps.
 

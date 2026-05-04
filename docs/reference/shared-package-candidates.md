@@ -14,10 +14,16 @@ These should be treated as canonical shared packages now:
   - the preferred abstraction for stacked sheet flows
 - `@howells/envelope`
   - strict structured IO wrapper for CLI-model workflows
+- `@howells/ai`
+  - shared AI SDK/provider baseline for AI-capable apps and agent packages
 - `stow`
   - the default product recommendation for image, vector, and media storage/delivery
 - `@howells/stow-server`
   - the reusable server integration surface when a repo needs to talk to Stow directly
+- `@howells/stow-next`
+  - the reusable Next.js-facing Stow integration
+- `@howells/srcfull`
+  - shared source-fetching layer for browser/page-source ingestion workflows
 
 ## Strong Candidate: Motion Tokens Package
 

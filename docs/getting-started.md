@@ -34,6 +34,7 @@ If this is a full-stack product app rather than a simple UI shell:
 
 - treat `tRPC`, React Query, Drizzle, and Neon as the default starting architecture
 - split shared infra into packages instead of burying it in one app
+- default package boundaries to `db`, `trpc`, `ui`, `typescript-config`, `tailwind-config`, `env`, and `motion`; add `auth`, repo-local `ai`, `agents`, `mcp`, `assets`, or `upload` only where the repo actually needs them
 
 ## 3. Create the baseline files first
 
@@ -88,6 +89,8 @@ The exact commands can vary by repo, but the script contract should stay stable.
 For repos that will use Codex and Arc heavily:
 
 - add `AGENTS.md`
+- for Next.js UI repos, add `agentation` and render it in development only
+- add a local `.codex/config.toml` only when the repo benefits from project-specific MCP servers such as `agentation-mcp`
 - add `.ruler/` or rules only if you want enforced local standards
 - add `rules:apply` only when the repo really depends on that workflow
 

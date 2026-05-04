@@ -10,7 +10,7 @@ Adjust names and filters, but do not casually change the overall contract.
 {
   "name": "my-project",
   "private": true,
-  "packageManager": "pnpm@10.23.0",
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
     "dev": "turbo run dev --filter=web",
     "dev:all": "turbo run dev --parallel",
@@ -25,12 +25,12 @@ Adjust names and filters, but do not casually change the overall contract.
     "prepare": "husky"
   },
   "devDependencies": {
-    "@howells/lint": "^0.1.1",
-    "@howells/typescript-config": "^0.1.0",
+    "@howells/lint": "^0.1.6",
+    "@howells/typescript-config": "^0.1.2",
     "husky": "9.1.7",
-    "lint-staged": "^16.2.7",
-    "turbo": "2.9.3",
-    "typescript": "5.9.3"
+    "lint-staged": "^16.4.0",
+    "turbo": "2.9.8",
+    "typescript": "6.0.3"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,json,jsonc,css,md}": "howells-biome format --write --no-errors-on-unmatched"
@@ -45,6 +45,32 @@ Notes:
 
 - replace `web` with the primary app package when needed
 - if `test` is expensive, keep `check` light and create a heavier CI-only job
+
+## Default workspace shape
+
+For a full-stack product repo, start here:
+
+```text
+apps/
+  web/
+  storybook/              # only if shared UI exists
+packages/
+  db/
+  trpc/                   # typed app API layer
+  ui/
+  typescript-config/
+  tailwind-config/
+  motion/                 # when motion tokens/presets are shared
+  auth/                   # when auth is shared
+  ai/                     # only for repo-specific logic above @howells/ai
+  agents/                 # when agent behavior is shared
+  mcp/                    # when the repo exposes MCP tools or resources
+  assets/                 # when assets are shared
+  env/                    # when typed env is centralized
+  upload/                 # only if the repo has real upload/media behavior
+```
+
+This is a starting shape, not a checklist. Do not create empty packages just to satisfy the diagram.
 
 ## `pnpm-workspace.yaml`
 
@@ -111,7 +137,7 @@ For a Next.js monorepo:
 
 ```json
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.10/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
   "extends": [
     "@howells/lint/biome/core",
     "@howells/lint/biome/react",
@@ -136,7 +162,7 @@ For a non-UI or mixed repo, start with just:
 
 ```json
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.10/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
   "extends": ["@howells/lint/biome/core"],
   "root": true
 }
@@ -238,6 +264,39 @@ Optional heavier gate:
 pnpm typecheck || exit 1
 pnpm lint || exit 1
 pnpm test || exit 1
+```
+
+## `.codex/config.toml` for Agentation
+
+Use this only for repos that want project-local Agentation MCP wiring:
+
+```toml
+[mcp_servers.agentation]
+command = "npx"
+args = ["-y", "agentation-mcp", "server"]
+```
+
+## Next.js root layout snippet for Agentation
+
+For App Router repos that use Agentation in development:
+
+```tsx
+import { Agentation } from "agentation";
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        {process.env.NODE_ENV === "development" && <Agentation />}
+      </body>
+    </html>
+  );
+}
 ```
 
 Not every repo should have this.

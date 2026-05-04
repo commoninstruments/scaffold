@@ -22,12 +22,21 @@ Use Arc as the higher-level workflow layer when a task needs structure rather th
 Recommended Arc workflows:
 
 - `/arc:ideate` for feature design
-- `/arc:build` for small-to-medium implementation
-- `/arc:implement` for larger planned work
+- `/arc:implement` for scoped implementation, from small edits through larger planned work
 - `/arc:design` for UI design direction
 - `/arc:review` before merging meaningful changes
 - `/arc:document` when the repo needs real docs, not a throwaway README
 - `/arc:tidy` to clean up stale plans after completion
+
+## Agentation
+
+For Next.js UI repos that will be iterated visually with agents:
+
+- add `agentation`
+- render `<Agentation />` only in development
+- add a local `.codex/config.toml` entry for `agentation-mcp` when the repo wants annotation syncing inside the project
+
+This is now recurring often enough in active product repos that it should be treated as a standard option, not a one-off experiment.
 
 ## Rules and `.ruler`
 

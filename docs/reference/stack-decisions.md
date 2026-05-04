@@ -8,13 +8,13 @@ Pin these unless there is a deliberate repo-specific reason not to:
 
 | Tool | Baseline |
 |------|----------|
-| `pnpm` | `10.23.0` |
-| `turbo` | `2.9.3` |
-| `typescript` | `5.9.3` |
+| `pnpm` | `10.33.2` |
+| `turbo` | `2.9.8` |
+| `typescript` | `6.0.3` |
 | `husky` | `9.1.7` |
-| `lint-staged` | `16.x` |
-| `@howells/lint` | `0.1.1` |
-| `@howells/typescript-config` | `0.1.0` |
+| `lint-staged` | `16.4.0` |
+| `@howells/lint` | `0.1.6` |
+| `@howells/typescript-config` | `0.1.2` |
 | Node | `>=20.19` for new repos |
 
 ## Package Manager
@@ -164,7 +164,7 @@ For agent-heavy visual product work, there is also a repeated development tool:
 The repeated package names across your Turborepos are also clear enough to treat as default boundaries, not accidental patterns:
 
 - first tier: `db`, `ui`, `typescript-config`, `tailwind-config`
-- second tier: `utils`, `trpc`, `motion`, `auth`, `ai`
+- second tier: `utils`, `trpc`, `motion`, `auth`, `agents`, `mcp`, repo-local `ai` packages above `@howells/ai`
 - optional but frequent: `assets`, `upload`, `storage`, `env`, `config`
 
 The detailed policy lives in [Default Dependencies](./default-dependencies.md).

@@ -4,10 +4,10 @@ Use this when starting a new repo or standardizing an existing one.
 
 ## Baseline
 
-- `packageManager` pinned to `pnpm@10.23.0`
+- `packageManager` pinned to `pnpm@10.33.2`
 - Node engine pinned to `>=20.19`
-- `turbo` pinned to `2.9.3`
-- `typescript` pinned to `5.9.3`
+- `turbo` pinned to `2.9.8`
+- `typescript` pinned to `6.0.3`
 - `@howells/lint` installed
 - `@howells/typescript-config` installed
 - workspace layout uses `apps/*` and `packages/*`

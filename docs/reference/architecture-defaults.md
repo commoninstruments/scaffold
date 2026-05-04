@@ -123,18 +123,35 @@ For projects with serious image, vector, or media needs:
 
 - use `stow` as the default platform recommendation
 - use `@howells/stow-server` when a reusable server integration layer is needed
+- use `@howells/stow-next` when a Next.js app needs the app-facing Stow integration
 
 ## AI-Enabled Apps
 
 For apps that genuinely need AI features, the recurring pattern is:
 
-- Vercel AI SDK via `ai`
-- `@openrouter/ai-sdk-provider` when model routing across providers is useful
+- `@howells/ai` as the shared AI SDK/provider baseline
 - `zod` for structured input and output contracts
 
 If the repo is doing CLI-model orchestration or needs stricter typed IO around agent calls:
 
 - consider `@howells/envelope`
+
+## Agent and MCP Surfaces
+
+Recent agent-heavy repos are converging on explicit package boundaries for tool surfaces:
+
+- `packages/agents` for reusable agent definitions, evaluators, and model-facing orchestration
+- `packages/mcp` or `packages/mcp-server` for MCP server contracts and transport code
+- `packages/cli` when the agent or ingestion surface needs a first-class command line
+
+Use `zod` for tool and transport schemas, and keep provider plumbing behind `@howells/ai` instead of scattering raw AI SDK clients through app code.
+
+## Ingestion and Enrichment
+
+For source-heavy or scraper-heavy repos:
+
+- use a dedicated `ingestion`, `enrichment`, or `scraper` package when pipeline behavior becomes substantial
+- consider `@howells/srcfull` for browser/page-source extraction before building a fresh source-fetching layer
 
 ## Overlay Model
 

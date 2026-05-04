@@ -15,6 +15,8 @@ packages/
   db/
   trpc/
   ui/
+  typescript-config/
+  tailwind-config/
   env/
   motion/
 ```
@@ -55,6 +57,26 @@ Put these here:
 
 Do not put page-specific product UI here just because it uses shared components.
 
+## `packages/typescript-config`
+
+Put this here when the repo has multiple leaves that should share explicit presets:
+
+- app presets
+- package presets
+- test-specific presets only if the repo truly needs them
+
+This now recurs enough that it should be considered part of the default monorepo shape, not an afterthought.
+
+## `packages/tailwind-config`
+
+Put these here:
+
+- shared Tailwind CSS setup
+- shared stylesheets
+- design-token wiring for apps and UI packages
+
+If multiple apps or packages consume the same styling baseline, keep that contract here instead of duplicating CSS setup.
+
 ## `packages/env`
 
 Put these here:
@@ -87,6 +109,15 @@ Use when:
 
 Do not extract this too early in a small repo.
 
+### `packages/assets`
+
+Use when:
+
+- multiple apps or packages consume the same images, icons, or generated asset metadata
+- design-system or product surfaces need a shared asset contract
+
+This shows up often enough that it should be a deliberate choice when a repo has more than one surface.
+
 ### `packages/upload` or `packages/storage`
 
 Use when:
@@ -98,8 +129,37 @@ Use when:
 
 Use when:
 
-- AI models, prompts, adapters, or orchestration logic are shared
+- repo-specific models, prompts, adapters, or orchestration logic need a home above one app
 - more than one surface depends on the same model logic
+
+Use `@howells/ai` as the shared baseline before creating fresh provider wrappers here.
+
+### `packages/agents`
+
+Use when:
+
+- agent definitions, evaluators, prompts, or tool wiring are reused by more than one surface
+- model-facing orchestration has become more than a single app feature
+
+Keep provider setup behind `@howells/ai`; this package should own product-specific agent behavior.
+
+### `packages/mcp` or `packages/mcp-server`
+
+Use when:
+
+- the repo exposes MCP tools or resources
+- tool schemas, transports, or server setup need to be shared with apps, CLIs, or tests
+
+Do not bury MCP server contracts inside a web app route if another surface needs to consume or test them.
+
+### `packages/cli`
+
+Use when:
+
+- ingestion, agent, or operations workflows need a first-class command line
+- scripts have grown into reusable commands with options, validation, and tests
+
+Do not create this for one-off maintenance scripts.
 
 ### `packages/core`
 
@@ -108,6 +168,14 @@ Use when:
 - the repo has substantial shared non-UI business logic
 
 Do not create `core` as a junk drawer.
+
+### `packages/utils`
+
+Use sparingly for:
+
+- genuinely shared, low-level helpers with no stronger domain home
+
+Do not let `utils` become the first place code goes. In your repos it exists often, but it is weaker than `db`, `ui`, `trpc`, `auth`, or `ai` as a boundary.
 
 ## What Should Stay in `apps/web`
 
@@ -151,9 +219,11 @@ If a package does not express a real dependency boundary, it is probably cargo-c
 If you do nothing else right, get these boundaries right first:
 
 1. `db`
-2. `trpc`
-3. `ui`
-4. `env`
-5. `motion`
+2. `ui`
+3. `typescript-config`
+4. `tailwind-config`
+5. `trpc`
+6. `motion`
+7. `env`
 
 That is where the portfolio already shows a durable pattern.
