@@ -108,7 +108,11 @@ Agents should not read `process.env` ad hoc throughout the codebase.
 
 For repos that need typed env handling:
 
+- use `@howells/envy`
 - centralize env access
 - separate server-only and client-safe variables
 - keep `.env.example` in sync
+- check provider env before deployment
 - scope Turbo task env lists to the tasks that need them
+
+Agents should prefer `envy check local` and provider checks over hand-written shell pipelines. Secrets should never be pushed with `echo`; use Envy helpers or provider CLIs that preserve exact values.

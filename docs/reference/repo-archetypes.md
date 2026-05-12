@@ -22,6 +22,7 @@ Default stack:
 - Neon
 - Clerk by default
 - `patternmode`
+- `@howells/envy` when runtime env exists
 
 Typical workspace:
 
@@ -118,11 +119,14 @@ Default stack:
 - package at repo root or minimal monorepo
 - `tsup` or repo-specific build tooling if needed
 - docs/demo site only if the package benefits from one
+- Node 24 for development and CI
+- Node `>=22.22.1` as the runtime floor only when the library does not need Node 24 APIs
 
 Examples in your ecosystem:
 
 - `@howells/stacksheet`
 - `@howells/envelope`
+- `@howells/envy`
 - `@howells/lint`
 - `@howells/typescript-config`
 

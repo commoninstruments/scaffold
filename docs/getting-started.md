@@ -34,6 +34,7 @@ If this is a full-stack product app rather than a simple UI shell:
 
 - treat `tRPC`, React Query, Drizzle, and Neon as the default starting architecture
 - split shared infra into packages instead of burying it in one app
+- use `@howells/envy` for typed env parsing and deployment env checks when runtime env exists
 - default package boundaries to `db`, `trpc`, `ui`, `typescript-config`, `tailwind-config`, `env`, and `motion`; add `auth`, repo-local `ai`, `agents`, `mcp`, `assets`, or `upload` only where the repo actually needs them
 
 ## 3. Create the baseline files first
@@ -41,6 +42,7 @@ If this is a full-stack product app rather than a simple UI shell:
 Start with these files before writing app code:
 
 - `package.json`
+- `.node-version`
 - `pnpm-workspace.yaml`
 - `turbo.json`
 - `biome.json`
@@ -63,6 +65,7 @@ For the current house baseline:
 - `typescript`
 - `husky`
 - `lint-staged`
+- `@howells/envy` when the repo has runtime env
 
 Do not start by hand-rolling repo-local lint or tsconfig wrappers.
 

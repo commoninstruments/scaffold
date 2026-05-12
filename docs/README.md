@@ -8,6 +8,7 @@ It is not a generic starter guide. It reflects the conventions that are already 
 - `arc` for agent workflows and project discipline
 - `@howells/lint` for Biome presets and pinned lint tooling
 - `@howells/typescript-config` for thin, explicit tsconfig presets
+- `@howells/envy` for typed env parsing and deployment env checks
 - `turbo-config` for conservative Turborepo defaults
 
 ## Assumptions

@@ -19,6 +19,7 @@ Usually include these too:
 
 - `tsx` for scripts and local tooling
 - `vitest` unless the repo truly has no test surface yet
+- `@howells/envy` when the repo has runtime environment variables
 
 ## Every UI Repo
 
@@ -118,12 +119,13 @@ These are the recurring defaults for richer app repos:
 - `drizzle-orm`
 - `drizzle-kit`
 - `@neondatabase/serverless`
-- `dotenv`
-- `dotenv-cli`
+- `@howells/envy`
 
 Use them when the project needs that capability. Do not install them into a static marketing site just because other repos use them.
 
 For full-stack TypeScript apps, `tRPC` should now be treated as a default recommendation, not just an occasional package.
+
+Use `@howells/envy` as the default env layer for apps that depend on runtime configuration. It should own typed parsing, local `.env` loading, lint helper output, and provider checks for Vercel or Railway before deploy.
 
 ## Media, Images, and Vectors
 
@@ -196,7 +198,7 @@ pnpm add -D @howells/lint @howells/typescript-config turbo typescript husky lint
 
 ```bash
 pnpm add -D @howells/lint @howells/typescript-config turbo typescript husky lint-staged vitest storybook @storybook/react-vite @testing-library/react @testing-library/jest-dom @testing-library/user-event playwright
-pnpm add next react react-dom tailwindcss @tailwindcss/postcss motion lucide-react zod clsx tailwind-merge sonner next-themes date-fns usehooks-ts nuqs agentation
+pnpm add next react react-dom tailwindcss @tailwindcss/postcss motion lucide-react zod clsx tailwind-merge sonner next-themes date-fns usehooks-ts nuqs agentation @howells/envy
 ```
 
 ### Add stacked sheets to a UI repo
@@ -209,6 +211,12 @@ pnpm add @howells/stacksheet
 
 ```bash
 pnpm add @howells/ai zod
+```
+
+### Add typed env support
+
+```bash
+pnpm add @howells/envy zod
 ```
 
 ## Packages That Are Recurring Enough To Standardize
@@ -232,6 +240,7 @@ These are the strongest repeated dependencies from the scan of active repos:
 - `date-fns`
 - `usehooks-ts`
 - `@howells/ai`
+- `@howells/envy`
 - `@howells/stacksheet`
 - `@howells/stow-server`
 - `@howells/stow-next`

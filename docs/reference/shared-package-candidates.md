@@ -16,6 +16,8 @@ These should be treated as canonical shared packages now:
   - strict structured IO wrapper for CLI-model workflows
 - `@howells/ai`
   - shared AI SDK/provider baseline for AI-capable apps and agent packages
+- `@howells/envy`
+  - typed env parsing, lint helpers, and deployment env preflight checks
 - `stow`
   - the default product recommendation for image, vector, and media storage/delivery
 - `@howells/stow-server`
@@ -92,6 +94,8 @@ These are useful patterns, but they should stay repo-local for now:
 
 They encode app boundaries, not cross-project standards.
 
+The env exception is implementation, not ownership: keep a repo-local `packages/env` boundary, but build it on `@howells/envy` instead of publishing another env package per app.
+
 ## Product Recommendation vs Package Recommendation
 
 There is an important distinction here:
@@ -109,8 +113,9 @@ For new projects, the default decision should be:
 If you want to reduce duplicated package work across the portfolio, the best order is:
 
 1. keep using `@howells/lint` and `@howells/typescript-config` everywhere
-2. standardize `@howells/stacksheet` as the default stacked-panel abstraction
-3. unify motion tokens into one shared package
-4. stabilize `patternmode` as the UI upstream before publishing more UI internals
+2. use `@howells/envy` for repo-local env boundaries instead of creating more package-specific env tooling
+3. standardize `@howells/stacksheet` as the default stacked-panel abstraction
+4. unify motion tokens into one shared package
+5. stabilize `patternmode` as the UI upstream before publishing more UI internals
 
 That order reduces duplication without locking in the wrong abstractions too early.

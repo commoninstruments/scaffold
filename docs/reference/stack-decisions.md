@@ -8,20 +8,22 @@ Pin these unless there is a deliberate repo-specific reason not to:
 
 | Tool | Baseline |
 |------|----------|
-| `pnpm` | `10.33.2` |
-| `turbo` | `2.9.8` |
+| `pnpm` | `11.1.1` |
+| `turbo` | `2.9.12` |
 | `typescript` | `6.0.3` |
 | `husky` | `9.1.7` |
-| `lint-staged` | `16.4.0` |
+| `lint-staged` | `17.0.4` |
 | `@howells/lint` | `0.1.6` |
 | `@howells/typescript-config` | `0.1.2` |
-| Node | `>=20.19` for new repos |
+| `@howells/envy` | `0.3.5` |
+| Node | `24.x` LTS for new repos |
 
 ## Package Manager
 
 - Use `pnpm`.
 - Pin `packageManager` in the root `package.json`.
 - Prefer one lockfile at the repo root.
+- Use Node 24 LTS for development, CI, apps, and services.
 - Default workspace layout is:
 
 ```yaml
@@ -29,6 +31,19 @@ packages:
   - "apps/*"
   - "packages/*"
 ```
+
+## Node Version Policy
+
+Use Node 24 LTS as the Howells stack baseline.
+
+Defaults:
+
+- app and service repos: `"node": ">=24.15.0 <25"`
+- CI: Node `24.x`
+- local version files: pin the latest Node 24 LTS patch
+- published packages: keep runtime support at `>=22.22.1` when the package does not need Node 24 APIs, but build and test on Node 24
+
+Do not start new work on Node 20. It is end-of-life. Do not standardize on Node 26 until it reaches LTS.
 
 ## Turborepo
 
@@ -39,6 +54,7 @@ Use Turbo as an orchestrator, not as a place to hide complexity.
 - Keep `globalDependencies` limited to `.env` files.
 - Scope environment variables at the task level, not globally.
 - Put package-specific exceptions in leaf packages when needed.
+- Avoid deprecated `turbo run --parallel`; let persistent `dev` tasks run through task config.
 
 The recent pattern across `patternmode`, `materia`, `sorrel`, `scenes`, and `colorscope` is clear: hidden stale-cache failures cost more than slower local runs.
 
@@ -73,6 +89,24 @@ Rules:
 - avoid repo-local lint wrappers unless the repo has a genuinely unique constraint
 - prefer inline suppressions over broad config weakening
 - keep format and lint behavior consistent across repos
+- keep the Biome schema URL aligned to the Biome version pinned by `@howells/lint`
+
+For env access, use `@howells/envy` lint helpers with Oxlint or ESLint when a repo needs to enforce "no direct `process.env`" more strongly than Biome can on its own.
+
+## Environment Variables
+
+Use `@howells/envy` for repos with runtime configuration.
+
+Default approach:
+
+- put the schema in `packages/env`
+- parse explicitly by default
+- expose separate server and client env modules
+- allow direct `process.env` only inside the env boundary
+- run local env checks in `pnpm check`
+- run Vercel or Railway env checks before deploy
+
+Do not keep hand-written dotenv loading, ad hoc `process.env` reads, or provider env setup scripts once Envy can own that surface.
 
 ## Husky and Git Hooks
 
@@ -156,6 +190,7 @@ The packages that recur most often in UI work are:
 - `usehooks-ts`
 - `@radix-ui/react-slot`
 - `@radix-ui/react-dialog`
+- `@howells/envy`
 
 For agent-heavy visual product work, there is also a repeated development tool:
 

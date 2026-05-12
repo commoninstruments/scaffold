@@ -4,12 +4,15 @@ Use this when starting a new repo or standardizing an existing one.
 
 ## Baseline
 
-- `packageManager` pinned to `pnpm@10.33.2`
-- Node engine pinned to `>=20.19`
-- `turbo` pinned to `2.9.8`
+- `packageManager` pinned to `pnpm@11.1.1`
+- Node engine pinned to `>=24.15.0 <25` for apps and services
+- `.node-version` pins the current Node 24 LTS patch
+- `turbo` pinned to `2.9.12`
 - `typescript` pinned to `6.0.3`
+- `lint-staged` pinned to `17.0.4`
 - `@howells/lint` installed
 - `@howells/typescript-config` installed
+- `@howells/envy` installed when runtime env exists
 - workspace layout uses `apps/*` and `packages/*`
 
 ## Config
@@ -46,6 +49,7 @@ Use this when starting a new repo or standardizing an existing one.
 
 - cache is disabled by default in Turbo tasks
 - task-level env is scoped narrowly
+- env parsing and provider checks use `@howells/envy` when the repo has runtime env
 - there is no generic local lint wrapper drifting away from `@howells/lint`
 - there is no generic local tsconfig base hiding runtime assumptions
 - there is no duplicate component system growing beside `patternmode` in a new UI repo

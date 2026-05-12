@@ -136,6 +136,12 @@ If the repo is doing CLI-model orchestration or needs stricter typed IO around a
 
 - consider `@howells/envelope`
 
+## Runtime Environment
+
+Use `@howells/envy` when an app depends on runtime env.
+
+The default shape is a `packages/env` boundary that owns schema definition, parsing, generated Next.js server/client modules, lint helper config, and provider preflight checks. App code should import typed env exports rather than reading `process.env` directly.
+
 ## Agent and MCP Surfaces
 
 Recent agent-heavy repos are converging on explicit package boundaries for tool surfaces:
@@ -173,6 +179,7 @@ For a new product app, the default answer is usually:
 - Neon
 - Clerk
 - `patternmode`
+- Envy if runtime env exists
 - Storybook if shared UI exists
 - Fumadocs if the repo needs docs
 - Stow if the repo needs media storage

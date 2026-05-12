@@ -78,6 +78,20 @@ Keep this simple:
 - one obvious production path
 - no hidden deployment routes
 
+## Environment Preflight
+
+Use `@howells/envy` before deployments that depend on runtime configuration.
+
+Default checks:
+
+- validate local and CI env against the schema
+- check Vercel env before Vercel deploys
+- check Railway env before Railway deploys
+- push only schema-declared variables
+- avoid shell pipelines that can add newlines or leak secret values
+
+The deploy should fail before it reaches the provider if required env is missing.
+
 ## Deployment Rules
 
 - deployment should match repo archetype
@@ -91,5 +105,6 @@ Keep this simple:
 - Storybook surface: Vercel
 - worker-heavy or service-heavy backend: Railway-style deployment
 - media storage and delivery: Stow
+- runtime env preflight: Envy
 
 That is the default unless the repo has a concrete reason to deviate.

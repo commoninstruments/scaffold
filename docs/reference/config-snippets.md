@@ -10,33 +10,33 @@ Adjust names and filters, but do not casually change the overall contract.
 {
   "name": "my-project",
   "private": true,
-  "packageManager": "pnpm@10.33.2",
+  "packageManager": "pnpm@11.1.1",
   "scripts": {
     "dev": "turbo run dev --filter=web",
-    "dev:all": "turbo run dev --parallel",
+    "dev:all": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "format": "howells-biome format --write .",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "check": "pnpm typecheck && pnpm lint && pnpm test",
+    "check": "pnpm lint && pnpm typecheck && pnpm test",
     "check:affected": "turbo run build lint typecheck test --affected",
-    "clean": "turbo run clean --continue=always && turbo clean",
+    "clean": "turbo run clean --continue=always && rm -rf .turbo",
     "prepare": "husky"
   },
   "devDependencies": {
     "@howells/lint": "^0.1.6",
     "@howells/typescript-config": "^0.1.2",
     "husky": "9.1.7",
-    "lint-staged": "^16.4.0",
-    "turbo": "2.9.8",
+    "lint-staged": "17.0.4",
+    "turbo": "2.9.12",
     "typescript": "6.0.3"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,json,jsonc,css,md}": "howells-biome format --write --no-errors-on-unmatched"
   },
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24.15.0 <25"
   }
 }
 ```
@@ -45,6 +45,15 @@ Notes:
 
 - replace `web` with the primary app package when needed
 - if `test` is expensive, keep `check` light and create a heavier CI-only job
+- for published packages that can support Node 22, use `"node": ">=22.22.1"` in the package itself while keeping repo tooling on Node 24
+
+## `.node-version`
+
+```text
+24.15.0
+```
+
+Keep local development, CI, and deployment runtimes on Node 24 LTS. Do not use Node 26 for the house baseline until it reaches LTS.
 
 ## Default workspace shape
 
@@ -158,6 +167,8 @@ For a Next.js monorepo:
 }
 ```
 
+The schema URL should track the Biome version pinned by `@howells/lint`. Do not bump it separately from the house lint package.
+
 For a non-UI or mixed repo, start with just:
 
 ```json
@@ -261,10 +272,40 @@ Use this as the default. Only make it heavier when the repo truly needs that pre
 Optional heavier gate:
 
 ```sh
-pnpm typecheck || exit 1
 pnpm lint || exit 1
+pnpm typecheck || exit 1
 pnpm test || exit 1
 ```
+
+## Envy env boundary
+
+Use this shape for repos with runtime env:
+
+```ts
+// packages/env/src/schema.ts
+import { defineEnv, v } from "@howells/envy";
+import { z } from "zod";
+
+export const envSchema = defineEnv({
+  server: {
+    DATABASE_URL: v(z.url()),
+  },
+  public: {
+    NEXT_PUBLIC_APP_URL: v(z.url()),
+  },
+});
+```
+
+```json
+{
+  "scripts": {
+    "env:check": "envy check local --schema packages/env/src/schema.ts",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm env:check"
+  }
+}
+```
+
+For provider checks, prefer Envy's Vercel or Railway adapters over hand-written shell scripts.
 
 ## `.codex/config.toml` for Agentation
 

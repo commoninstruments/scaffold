@@ -84,8 +84,9 @@ Put these here:
 - env schema
 - server/client env parsing
 - typed env exports
+- Envy setup and generated Next.js env boundary files
 
-Do not read `process.env` throughout the codebase.
+Use `@howells/envy` as the default implementation. Do not read `process.env` throughout the codebase outside this boundary.
 
 ## `packages/motion`
 
