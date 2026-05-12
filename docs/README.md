@@ -1,6 +1,6 @@
 # New Project Docs
 
-This docs set is the canonical starting point for a new project in `/Users/danielhowells/Sites`.
+This docs set is the canonical starting point for a new Howells project.
 
 It is not a generic starter guide. It reflects the conventions that are already converging across your recently active repos:
 
