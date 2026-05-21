@@ -1,0 +1,4 @@
+.DS_Store
+package-inventory-*.csv
+package-inventory-*.json
+package-inventory-*.md

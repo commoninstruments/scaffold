@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold"
+  short_description: "Create Howells project baselines"
+  default_prompt: "Use $scaffold to create or standardize a new Howells project."
