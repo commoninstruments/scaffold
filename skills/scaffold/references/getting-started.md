@@ -22,7 +22,7 @@ Before creating files, choose the repo archetype from [Repo Archetypes](./refere
 
 If the project ships a UI:
 
-- use `patternmode` as the upstream for shared UI
+- start from the bundled UI baseline in [UI Projects](./reference/ui-projects.md)
 - default to Next.js App Router
 - keep shared primitives in a package, not in the app
 - include Storybook when the repo exports reusable UI
@@ -133,7 +133,7 @@ If you do not use the default stack, write down the reason early:
 - why not `tRPC` for a TypeScript product API
 - why not `@howells/ai` for AI provider plumbing
 - why not `@howells/envy` for runtime env
-- why not `patternmode` for shared UI primitives
+- why not the bundled UI baseline for shared UI primitives
 
 The goal is not lockstep. The goal is to avoid re-deciding the same defaults in every repo.
 

@@ -4,7 +4,7 @@ This docs set is the canonical starting point for a new Howells project.
 
 It is not a generic starter guide. It reflects the conventions that are already converging across your recently active repos:
 
-- `patternmode` for shared UI, tokens, motion, and Storybook
+- the bundled UI baseline for shared UI, tokens, motion, and Storybook
 - `arc` for agent workflows and project discipline
 - `@howells/lint` for Biome presets and pinned lint tooling
 - `@howells/typescript-config` for thin, explicit tsconfig presets

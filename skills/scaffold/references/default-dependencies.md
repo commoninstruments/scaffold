@@ -212,6 +212,12 @@ This is the important distinction:
 - `vaul` is the primitive
 - `@howells/stacksheet` is the stronger product abstraction when you need actual sheet stack orchestration
 
+For thumbnail-to-expanded media transitions:
+
+- use `@howells/aperto`
+
+Patternmode is relevant here only as provenance for these specific installable components. Do not treat it as a UI layer, shared UI upstream, or design-system dependency.
+
 ## Suggested Install Sets
 
 ### New non-UI monorepo
@@ -238,6 +244,12 @@ pnpm add -D drizzle-kit
 
 ```bash
 pnpm add @howells/stacksheet
+```
+
+### Add media expansion transitions to a UI repo
+
+```bash
+pnpm add @howells/aperto
 ```
 
 ### Add AI support
@@ -286,6 +298,7 @@ These are the strongest repeated dependencies from the scan of active repos:
 - `@howells/ai`
 - `@howells/envy`
 - `@howells/stacksheet`
+- `@howells/aperto`
 - `@howells/stow-server`
 - `@howells/stow-next`
 - `agentation`

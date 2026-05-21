@@ -23,7 +23,7 @@ Default stack:
 - Drizzle
 - Neon
 - Clerk by default
-- `patternmode`
+- bundled UI baseline
 - `@howells/envy` when runtime env exists
 - `@howells/ai`, Mastra, and MCP packages when agent behavior is product behavior
 
@@ -62,7 +62,7 @@ Use this for:
 
 Default stack:
 
-- `patternmode`-style monorepo
+- scaffold UI-baseline monorepo shape
 - Storybook
 - playground or docs app
 
@@ -128,6 +128,7 @@ Default stack:
 Examples in your ecosystem:
 
 - `@howells/stacksheet`
+- `@howells/aperto`
 - `@howells/envelope`
 - `@howells/envy`
 - `@howells/lint`
@@ -167,7 +168,7 @@ services/
   crons/
 ```
 
-This is closer to the `stow` model than the `patternmode` model.
+This is closer to the `stow` service model than the UI-system model.
 
 ## 6. AI Pipeline or Research Repo
 

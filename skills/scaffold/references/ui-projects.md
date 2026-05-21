@@ -1,33 +1,33 @@
 # UI Projects
 
-For new UI-based projects, `patternmode` is the default upstream.
+For new UI-based projects, the default is a local UI package seeded from the scaffold's bundled UI baseline.
 
-That is the key decision in this scaffold.
+That is the key decision in this scaffold: the shared shape lives here, not in a separate upstream repo.
 
-## What `patternmode` Owns
+## What The Bundled Baseline Owns
 
-Today, `patternmode` already defines the shape of the shared UI system:
+The scaffold now includes the old UI-system files directly under [Bundled UI Baseline](./ui-baseline/README.md). Use those files as a starting point for:
 
-- `@patternmode/ui` for primitives and shared compositions
-- `@patternmode/tailwind-config` for tokens and shared CSS entrypoint
-- `@patternmode/motion` for shared motion constants and helpers
-- `@patternmode/transition` for transition primitives
+- `packages/ui` for primitives and shared compositions
+- `packages/tailwind-config` for tokens and shared CSS entrypoint
+- `packages/motion` for shared motion constants and helpers
+- `packages/transition` for transition primitives
 - `apps/storybook` as the visual contract
-- `apps/playground` and `apps/web` as integration and system surfaces
+- `apps/playground` or a docs app as integration and system surfaces
 
 ## Default Rule
 
 If a new project has a UI, do not start by inventing a fresh component system.
 
-Start from `patternmode` and only diverge when one of these is true:
+Start from the bundled UI baseline and only diverge when one of these is true:
 
-- the product has a domain-specific component that does not belong upstream
+- the product has a domain-specific component that does not belong in shared UI
 - the project needs an app-local composition over shared primitives
 - the visual language needs new tokens or wrappers but not new primitive behavior
 
 ## What to Reuse vs What to Own
 
-Reuse from `patternmode`:
+Reuse from the bundled baseline:
 
 - primitive controls
 - base form fields
@@ -45,12 +45,12 @@ Own locally in the project:
 
 ## What Not to Do
 
-- do not copy-paste shared components into app code as a default workflow
+- do not copy-paste shared components into app code as a default workflow after the repo has a `packages/ui` boundary
 - do not fork primitives just to tweak spacing or visual tone
 - do not let every UI repo invent its own Tailwind token naming
 - do not treat shadcn output as the final design system
 
-The structural upstream is `patternmode`. The aesthetic layer remains project-specific.
+The structural baseline is bundled in this scaffold. The aesthetic layer remains project-specific.
 
 ## Baseline UI Stack
 
@@ -63,6 +63,17 @@ For a new UI repo, prefer:
 - `motion`
 - `lucide-react`
 - Storybook for reusable exported components
+
+## Reusable Howells UI Packages
+
+Do not use Patternmode as the UI layer for new projects. Only use specific installable components from it when the interaction matches the package.
+
+Use:
+
+- `@howells/stacksheet` for typed stacked sheets, drill-in panels, and multi-layer modal flows
+- `@howells/aperto` for styled thumbnail-to-expanded media transitions and media lightboxes
+
+Do not use Patternmode as a reason to skip a repo-local `packages/ui` boundary when the repo owns shared primitives. Patternmode is relevant here only as provenance for specific packages, not as a shared UI system.
 
 ## Overlay Standard
 
@@ -78,10 +89,16 @@ For stacked sheets, panel drills, or multi-layer modal flows:
 - prefer `@howells/stacksheet`
 - do not try to stretch a plain `vaul` drawer into a stacked workflow
 
+For thumbnail-to-expanded media interactions:
+
+- prefer `@howells/aperto`
+- keep custom gallery/product behavior local to the app around the package
+
 This distinction already shows up in your ecosystem:
 
 - `vaul` wrappers recur inside shared UI packages
 - `@howells/stacksheet` is the stronger abstraction when the interface needs real stack orchestration
+- `@howells/aperto` is the reusable media-transition component when the interface needs a polished image or video expansion pattern
 
 ## Storybook Rule
 
@@ -89,21 +106,21 @@ If the repo exports user-facing reusable UI, Storybook is required.
 
 That does not mean every app needs a huge Storybook surface. It means shared UI should have a visible contract and a place for visual regression checks.
 
-## Patternmode in Flight
+## Bundled Baseline In Flight
 
-`patternmode` is still evolving, so treat it as an upstream under active construction:
+The bundled baseline is still a starting point, not a frozen design system:
 
-- prefer contributing missing generic primitives back into `patternmode`
-- keep local wrappers thin while the upstream settles
-- avoid freezing a local fork unless the upstream cannot absorb the need
+- keep generic primitives in `packages/ui`
+- keep local wrappers thin until repeated needs prove a stronger shared primitive
+- update the scaffold baseline when the same improvement appears across multiple active repos
 
-This keeps the in-flight system moving toward a real canonical source instead of immediately fragmenting again.
+This keeps new projects aligned without depending on a separate live upstream.
 
 ## Migration Rule for Existing Projects
 
 When moving an older UI repo toward the new standard:
 
-1. adopt `patternmode` tokens and shared CSS entrypoint first
+1. adopt the bundled token structure and shared CSS entrypoint first
 2. migrate obvious primitives second
 3. migrate shared compositions only after the primitive contract is stable
 4. keep page-level product code local

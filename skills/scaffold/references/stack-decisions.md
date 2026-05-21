@@ -59,7 +59,7 @@ Use Turbo as an orchestrator, not as a place to hide complexity.
 - Put package-specific exceptions in leaf packages when needed.
 - Avoid deprecated `turbo run --parallel`; let persistent `dev` tasks run through task config.
 
-The recent pattern across `patternmode`, `materia`, `sorrel`, `scenes`, and `colorscope` is clear: hidden stale-cache failures cost more than slower local runs.
+The recent pattern across `materia`, `sorrel`, `scenes`, and `colorscope` is clear: hidden stale-cache failures cost more than slower local runs.
 
 ## TypeScript
 
@@ -133,7 +133,7 @@ For new UI repos:
 - Radix primitives
 - `motion` for animation, imported from `motion/react` in React code
 - Storybook for reusable exported components
-- `patternmode` as the upstream for shared UI packages
+- the bundled UI baseline as the starting point for shared UI packages
 
 This does not mean every product should look the same. It means structural decisions should be shared while brand and product expression stay local.
 

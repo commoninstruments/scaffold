@@ -51,6 +51,8 @@ For AI-capable repos, keep the agent surface explicit:
 
 Do not hide reusable agent or MCP contracts inside a route handler. That makes them harder to test, harder to expose to Codex or Arc, and harder to reuse from CLIs.
 
+When implementing Mastra code, verify the current API before writing against it. Prefer installed package docs under `node_modules/@mastra/*/dist/docs` when packages are present, and keep the TypeScript target/module setup on ES2022-compatible settings.
+
 ## Rules and `.ruler`
 
 Do not install a full rules system into every repo by default.

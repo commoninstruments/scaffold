@@ -1,0 +1,26 @@
+# Bundled UI Baseline
+
+This directory vendors the deleted UI-system files recovered from the old `~/Sites/patternmode` history at commit `1ffeb6ddb9d5d449a3618f3b73f79b93590cd463^`.
+
+Treat this as scaffold-owned reference material, not as an external upstream dependency. When creating a new UI repo, copy and adapt the relevant package shapes into that repo, then rename package scopes and imports to the target project.
+
+## What Is Included
+
+- `source/packages/motion` for durations, easings, springs, scales, and motion presets.
+- `source/packages/transition` for shared transition primitives and preset structure.
+- `source/packages/tailwind-config` for the Tailwind 4 shared stylesheet and token wiring.
+- `source/packages/ui/README.md` for the intended component package shape.
+- `source/docs/design-context.md` and `source/docs/arc/specs` for the visual and architectural rationale behind the baseline.
+- `source/apps/web/content/docs` for the old docs copy around installation, tokens, motion, and responsive behavior.
+
+## How To Use It
+
+For a new UI repo:
+
+1. Start with local workspace packages such as `packages/ui`, `packages/tailwind-config`, `packages/motion`, and `packages/transition` only when the repo needs them.
+2. Copy the relevant package files from `source/packages/*`.
+3. Rename `@patternmode/*` package names and imports to the repo's actual package scope or workspace aliases.
+4. Keep shared primitives in `packages/ui`; keep page-specific or domain-specific compositions in the app.
+5. Use Storybook when the repo exports reusable UI.
+
+The old files are intentionally preserved with their original names and package strings for provenance. The scaffold guidance should point at this bundled baseline, not at a live Patternmode package.

@@ -1,0 +1,51 @@
+"use client";
+
+import * as Dialog from "@radix-ui/react-dialog";
+import { motion } from "motion/react";
+import { type ComponentPropsWithoutRef, forwardRef } from "react";
+
+import { useTransitionContext } from "./context";
+import { resolvePreset } from "./presets";
+import type { MotionPresetName } from "./types";
+
+export interface TransitionTriggerProps
+  extends ComponentPropsWithoutRef<typeof Dialog.Trigger> {
+  /** Override motion preset for this trigger */
+  motion?: MotionPresetName;
+}
+
+const TransitionTrigger = forwardRef<HTMLButtonElement, TransitionTriggerProps>(
+  ({ children, motion: motionOverride, ...props }, ref) => {
+    const ctx = useTransitionContext();
+
+    const globalPresetName =
+      typeof ctx.preset === "object" ? "smooth" : "smooth";
+    const resolved = resolvePreset(
+      "trigger",
+      motionOverride,
+      globalPresetName,
+      ctx.variants,
+      false,
+    );
+
+    return (
+      <Dialog.Trigger asChild ref={ref} {...props}>
+        <motion.button
+          data-slot="transition-trigger"
+          layout
+          layoutCrossfade={false}
+          layoutId={`${ctx.layoutId}-shared`}
+          style={{ zIndex: ctx.open ? 0 : 1 }}
+          transition={resolved.transition}
+          type="button"
+        >
+          {children}
+        </motion.button>
+      </Dialog.Trigger>
+    );
+  },
+);
+
+TransitionTrigger.displayName = "TransitionTrigger";
+
+export { TransitionTrigger };

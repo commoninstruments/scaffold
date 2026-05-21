@@ -86,7 +86,7 @@ When a project needs a proper docs site, the recurring answer is:
 
 - Fumadocs
 
-That already appears in `patternmode`, `colorscope`, and `stow`.
+That already appears in the existing docs-style surfaces across the portfolio.
 
 Use it when:
 
@@ -102,7 +102,7 @@ When the repo owns reusable UI:
 
 - keep shared components in a package
 - use Storybook as the visual contract
-- use `patternmode` as the upstream for new UI-first work
+- seed new UI-first work from the bundled UI baseline
 
 Storybook is not mandatory for every app. It is mandatory when the repo exports reusable UI that should be reviewed and regression-checked in isolation.
 
@@ -117,7 +117,7 @@ That means:
 
 - generate components when it accelerates setup
 - immediately align them to shared tokens, wrappers, and repo conventions
-- upstream generic improvements into `patternmode` where appropriate
+- fold recurring generic improvements back into the scaffold baseline where appropriate
 
 ## Media and Asset Storage
 
@@ -183,6 +183,7 @@ Use the overlay primitives deliberately:
 
 - ordinary drawer or sheet: shared `vaul`-backed drawer layer
 - stacked sheets or nested panel drills: `@howells/stacksheet`
+- thumbnail-to-expanded image or video transitions: `@howells/aperto`
 
 This avoids the common mistake of stretching a simple drawer primitive into a multi-layer workflow it was not designed to own.
 
@@ -196,7 +197,7 @@ For a new product app, the default answer is usually:
 - Drizzle
 - Neon
 - Clerk
-- `patternmode`
+- the bundled UI baseline
 - `@howells/ai` plus Mastra/MCP packages when agent behavior is part of the product
 - Envy if runtime env exists
 - Storybook if shared UI exists

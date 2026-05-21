@@ -1,0 +1,52 @@
+---
+title: Responsive System
+description: Breakpoint-aware props with ResponsiveValue<T>.
+---
+
+Layout primitives like `Flex`, `Grid`, `Stack`, and `Heading` accept responsive props. Pass a static value or an object keyed by breakpoint.
+
+## ResponsiveValue\<T\>
+
+```ts
+type ResponsiveValue<T> = T | (Partial<Record<Breakpoint, T>> & { base?: T });
+```
+
+A static value applies at all sizes. A responsive object lets you override per breakpoint -- only set the breakpoints you need.
+
+```tsx
+// Static — same everywhere
+<Flex gap="base" />
+
+// Responsive — changes at md
+<Flex gap={{ base: "xs", md: "base" }} />
+```
+
+## Breakpoints
+
+| Token | Width | Typical device |
+|-------|------:|----------------|
+| `base` | 0px | all |
+| `2xs` | 320px | small mobile |
+| `xs` | 480px | mobile |
+| `sm` | 640px | large mobile |
+| `md` | 768px | tablet |
+| `lg` | 1024px | laptop |
+| `xl` | 1280px | desktop |
+| `2xl` | 1536px | large desktop |
+| `3xl` | 1920px | ultrawide |
+
+## Screen vs. container mode
+
+The responsive system supports both viewport (`screen`) and container query (`container`) modes. Viewport mode uses standard Tailwind breakpoint prefixes (`md:`), while container mode uses container query prefixes (`@md:`).
+
+```ts
+getResponsiveClasses({ base: "xs", md: "base" }, GAP_MAP, "screen");
+// → ["gap-2", "md:gap-4"]
+
+getResponsiveClasses({ base: "xs", md: "base" }, GAP_MAP, "container");
+// → ["gap-2", "@md:gap-4"]
+```
+
+## Example
+
+<Preview path="flex-responsive" />

@@ -46,7 +46,7 @@ This is the clearest next shared package candidate.
 Why:
 
 - `motion` is one of the highest-frequency UI dependencies
-- `patternmode` already has `@patternmode/motion`
+- the bundled UI baseline includes a small motion package snapshot
 - `materia` already has `@materia/motion`
 - both repos are solving the same problem: durations, easings, springs, presets
 
@@ -65,7 +65,7 @@ It should not become a second animation library.
 
 ## Strong Candidate: Transition Primitives
 
-`@patternmode/transition` suggests another promising shared layer.
+The bundled transition snapshot suggests another promising shared layer.
 
 Why:
 
@@ -75,19 +75,19 @@ Why:
 
 Recommendation:
 
-- stabilize transition primitives in `patternmode`
-- only publish them separately if they prove reusable outside the Patternmode ecosystem
+- stabilize transition primitives inside repos that need them
+- only publish them separately if they prove reusable outside one product family
 
 ## Medium Candidate: Shared Drawer and Sidepanel Layer
 
-You have repeated `vaul` wrappers across `patternmode`, `materia`, `curioda`, `sorrel`, `stow`, and `siteinspire`.
+You have repeated `vaul` wrappers across `materia`, `curioda`, `sorrel`, `stow`, and `siteinspire`.
 
 That is a signal.
 
 Recommendation:
 
 - do not publish a generic drawer package yet
-- first collapse the repeated wrappers into the `patternmode` upstream
+- first collapse the repeated wrappers into the scaffold UI baseline or a repo-local shared UI package
 - publish only if that API becomes stable and broadly useful outside your repos
 
 For now:
@@ -129,6 +129,6 @@ If you want to reduce duplicated package work across the portfolio, the best ord
 3. keep `@howells/ai` as the shared AI/provider baseline instead of scattering raw provider clients
 4. standardize `@howells/stacksheet` as the default stacked-panel abstraction
 5. unify motion tokens into one shared package
-6. stabilize `patternmode` as the UI upstream before publishing more UI internals
+6. stabilize the bundled UI baseline through real consuming repos before publishing more UI internals
 
 That order reduces duplication without locking in the wrong abstractions too early.

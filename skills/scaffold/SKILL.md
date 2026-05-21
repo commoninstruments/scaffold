@@ -18,7 +18,7 @@ Load only the references needed for the current task:
 - `references/package-boundaries.md` for workspace package layout.
 - `references/default-dependencies.md` for package selection.
 - `references/config-snippets.md` when generating baseline files.
-- `references/ui-projects.md` for UI and PatternMode decisions.
+- `references/ui-projects.md` for UI baseline decisions.
 - `references/agent-workflow.md` for AGENTS.md, Arc, and Agentation setup.
 - `references/deployment-defaults.md` for hosting/runtime decisions.
 - `references/shared-package-candidates.md` when deciding what should become shared.

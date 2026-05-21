@@ -26,7 +26,7 @@ If the repo has a real docs site:
 - use Fumadocs on Next.js
 - deploy on Vercel by default
 
-This already aligns with `patternmode`, `colorscope`, and `stow`-style docs surfaces.
+This already aligns with the docs-style surfaces in `colorscope`, `stow`, and similar projects.
 
 ## When Vercel Is Not Enough
 

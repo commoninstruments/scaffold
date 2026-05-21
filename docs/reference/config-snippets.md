@@ -234,7 +234,7 @@ For a non-DOM package:
 
 ## `components.json` for UI repos
 
-Use this when the repo is consuming shared UI from `patternmode`:
+Use this when the repo owns a local shared UI package seeded from the bundled UI baseline:
 
 ```json
 {
@@ -252,8 +252,8 @@ Use this when the repo is consuming shared UI from `patternmode`:
   "aliases": {
     "components": "packages/ui/src/components",
     "utils": "packages/ui/src/lib",
-    "ui": "@patternmode/ui/components",
-    "lib": "@patternmode/ui/lib"
+    "ui": "packages/ui/src/components",
+    "lib": "packages/ui/src/lib"
   }
 }
 ```

@@ -1,0 +1,4 @@
+{
+  "extends": "@howells/typescript-config/bundler-no-dom-library-monorepo",
+  "include": ["src/**/*.ts"]
+}

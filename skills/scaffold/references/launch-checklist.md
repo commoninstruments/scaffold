@@ -29,7 +29,7 @@ Use this when starting a new repo or standardizing an existing one.
 
 ## UI Projects
 
-- `patternmode` is the upstream assumption
+- the bundled UI baseline is the starting assumption
 - shared primitives live in a package, not in the app
 - Storybook exists for exported reusable UI
 - local wrappers are preferred over primitive forks
@@ -37,6 +37,7 @@ Use this when starting a new repo or standardizing an existing one.
 - `motion`, `lucide-react`, `zod`, `clsx`, `tailwind-merge`, and `sonner` are installed when the repo is UI-first
 - `@tanstack/react-query` is used for client server-state and `nuqs` for meaningful URL state
 - `@howells/stacksheet` is used for stacked sheet workflows instead of overextending a basic drawer
+- `@howells/aperto` is considered for thumbnail-to-expanded media transitions instead of rebuilding that interaction locally
 
 ## Full-Stack and AI Projects
 
@@ -64,7 +65,8 @@ Use this when starting a new repo or standardizing an existing one.
 - env parsing and provider checks use `@howells/envy` when the repo has runtime env
 - there is no generic local lint wrapper drifting away from `@howells/lint`
 - there is no generic local tsconfig base hiding runtime assumptions
-- there is no duplicate component system growing beside `patternmode` in a new UI repo
+- there is no duplicate component system growing beside `packages/ui` in a new UI repo
 - there is no second local motion/transition mini-framework appearing without a strong reason
+- there is no local clone of `@howells/stacksheet` or `@howells/aperto` behavior without a strong product-specific reason
 - there are no raw AI provider clients scattered through app routes
 - there are no new-project defaults derived from legacy PHP/Craft dependencies
