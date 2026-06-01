@@ -16,14 +16,18 @@ These should be treated as canonical shared packages now:
   - strict structured IO wrapper for CLI-model workflows
 - `@howells/ai`
   - shared AI SDK/provider baseline for AI-capable apps and agent packages
+- `@howells/motif-sdk`
+  - shared fal.ai image-generation, editing, utility media, model registry, and cost-estimation surface
+- `@howells/motif-cli`
+  - agent-friendly image-generation CLI with dry runs, structured output, local history, and series workflows
+- `@howells/motif-mcp`
+  - MCP tools and resources for image generation, editing, utility media actions, model metadata, and history
 - `@howells/envy`
   - typed env parsing, lint helpers, and deployment env preflight checks
-- `stow`
-  - the default product recommendation for image, vector, and media storage/delivery
 - `@howells/stow-server`
-  - the reusable server integration surface when a repo needs to talk to Stow directly
+  - the reusable server integration surface when a repo needs to talk to the house media storage platform directly
 - `@howells/stow-next`
-  - the reusable Next.js-facing Stow integration
+  - the reusable Next.js-facing media storage integration
 - `@howells/srcfull`
   - shared source-fetching layer for browser/page-source ingestion workflows
 
@@ -39,6 +43,18 @@ Recommendation:
 
 Mastra and MCP should standardize as architecture choices before becoming more shared package surface.
 
+## Keep Standardizing: Image Generation Surface
+
+`howells/motif` should be the default surface for fal.ai image generation, image editing, upscaling, background removal, image-to-video, model metadata, dry runs, cost estimates, structured CLI output, and MCP image tools.
+
+Recommendation:
+
+- use `@howells/motif-sdk` for product or package code
+- use `@howells/motif-cli` for scriptable local and agent workflows
+- use `@howells/motif-mcp` when other agents need image-generation tools through MCP
+- keep durable media storage separate through the house media storage platform
+- do not write raw fal.ai clients in app routes unless Motif cannot cover the endpoint yet
+
 ## Strong Candidate: Motion Tokens Package
 
 This is the clearest next shared package candidate.
@@ -47,7 +63,6 @@ Why:
 
 - `motion` is one of the highest-frequency UI dependencies
 - the bundled UI baseline includes a small motion package snapshot
-- `materia` already has `@materia/motion`
 - both repos are solving the same problem: durations, easings, springs, presets
 
 Recommendation:
@@ -80,7 +95,7 @@ Recommendation:
 
 ## Medium Candidate: Shared Drawer and Sidepanel Layer
 
-You have repeated `vaul` wrappers across `materia`, `curioda`, `sorrel`, `stow`, and `siteinspire`.
+You have repeated `vaul` wrappers across several active UI repos.
 
 That is a signal.
 
@@ -99,8 +114,8 @@ For now:
 
 These are useful patterns, but they should stay repo-local for now:
 
-- env packages such as `@materia/env` or `@sorrel/env`
-- project-local domain packages such as `@materia/product` or `@sorrel/recipes`
+- repo-local env packages
+- project-local domain packages
 - repo-specific auth wrappers
 - repo-specific TRPC wrappers
 
@@ -112,12 +127,12 @@ The env exception is implementation, not ownership: keep a repo-local `packages/
 
 There is an important distinction here:
 
-- `stow` is the platform recommendation
+- the house media storage platform is the product recommendation
 - `@howells/stow-server` is the package recommendation
 
 For new projects, the default decision should be:
 
-- if the repo needs image, vector, or media storage, start by asking whether it should use Stow
+- if the repo needs image, vector, or media storage, start by asking whether it should use the house media storage platform
 - if the repo needs typed server-side integration, reach for `@howells/stow-server`
 
 ## Practical Standardization Order
@@ -127,8 +142,9 @@ If you want to reduce duplicated package work across the portfolio, the best ord
 1. keep using `@howells/lint` and `@howells/typescript-config` everywhere
 2. use `@howells/envy` for repo-local env boundaries instead of creating more package-specific env tooling
 3. keep `@howells/ai` as the shared AI/provider baseline instead of scattering raw provider clients
-4. standardize `@howells/stacksheet` as the default stacked-panel abstraction
-5. unify motion tokens into one shared package
-6. stabilize the bundled UI baseline through real consuming repos before publishing more UI internals
+4. use `howells/motif` for image generation and media utility workflows instead of scattering raw fal.ai clients
+5. standardize `@howells/stacksheet` as the default stacked-panel abstraction
+6. unify motion tokens into one shared package
+7. stabilize the bundled UI baseline through real consuming repos before publishing more UI internals
 
 That order reduces duplication without locking in the wrong abstractions too early.

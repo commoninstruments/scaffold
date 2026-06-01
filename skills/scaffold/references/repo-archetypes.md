@@ -43,6 +43,7 @@ packages/
   motion/
   auth/             # when auth is shared
   ai/               # only for repo-specific logic above @howells/ai
+  mastra/           # when Mastra owns agent/workflow runtime behavior
   agents/           # when agent behavior is shared
   mcp/              # when the repo exposes MCP tools or resources
   assets/           # when multiple surfaces share assets
@@ -168,7 +169,7 @@ services/
   crons/
 ```
 
-This is closer to the `stow` service model than the UI-system model.
+This is closer to a service-heavy media platform model than the UI-system model.
 
 ## 6. AI Pipeline or Research Repo
 
@@ -185,11 +186,12 @@ Default stack:
 - `zod`
 - `ai`
 - `@howells/ai`
+- `howells/motif` packages when image generation, editing, media utilities, CLI automation, or MCP image tools are central
 - Mastra when the repo needs agent orchestration, workflow state, memory, or observability
 - `@modelcontextprotocol/sdk` when the repo exposes MCP tools or resources
 - Drizzle if persistence is needed
-- Stow if generated assets are stored
-- `agents`, `mcp`, or `cli` packages when the repo exposes reusable agent tooling
+- the house media storage packages if generated assets are stored
+- `mastra`, `agents`, `mcp`, or `cli` packages when the repo exposes reusable agent tooling
 - `@howells/srcfull` if browser or page-source ingestion is central
 
 These repos usually need stronger script and data-pipeline conventions than typical UI apps.

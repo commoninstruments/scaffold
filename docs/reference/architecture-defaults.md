@@ -16,7 +16,7 @@ For a serious TypeScript product app, the recurring stack is:
 - Drizzle for the database layer
 - Neon Postgres via `@neondatabase/serverless`
 
-This pattern shows up strongly in `materia`, `sorrel`, and `siteinspire`-style apps.
+This pattern shows up strongly in current full-stack product apps.
 
 ### Default package set
 
@@ -123,9 +123,12 @@ That means:
 
 For projects with serious image, vector, or media needs:
 
-- use `stow` as the default platform recommendation
+- use `howells/motif` for image generation, editing, utility media tools, and agent-facing creative automation
+- use the house media storage platform as the default product recommendation
 - use `@howells/stow-server` when a reusable server integration layer is needed
-- use `@howells/stow-next` when a Next.js app needs the app-facing Stow integration
+- use `@howells/stow-next` when a Next.js app needs the app-facing media storage integration
+
+Keep the distinction clear: Motif owns generation, editing, upscaling, background removal, image-to-video, model metadata, dry runs, structured CLI output, and MCP tools. The storage platform owns durable storage and delivery.
 
 ## AI-Enabled Apps
 
@@ -133,6 +136,7 @@ For apps that genuinely need AI features, the recurring pattern is:
 
 - `ai` for the application-facing AI SDK surface
 - `@howells/ai` as the shared AI SDK/provider baseline
+- `howells/motif` for fal.ai image-generation and media-utility surfaces
 - `zod` for structured input and output contracts
 
 If the repo is doing CLI-model orchestration or needs stricter typed IO around agent calls:
@@ -144,6 +148,8 @@ When the repo is doing real agent orchestration, add Mastra deliberately:
 - `@mastra/core` for agent and workflow foundations
 - `mastra` for the CLI/dev runtime
 - `@mastra/pg`, `@mastra/memory`, or `@mastra/observability` only when those capabilities are present
+
+Put substantial Mastra code in `packages/mastra`, not inside an app route or a generic `packages/agents` boundary. See [Agentic Development](./agentic-development.md).
 
 Use raw provider SDKs only behind a boundary:
 
@@ -162,7 +168,8 @@ The default shape is a `packages/env` boundary that owns schema definition, pars
 Recent agent-heavy repos are converging on explicit package boundaries for tool surfaces:
 
 - `packages/ai` for repo-specific model/provider composition above `@howells/ai`
-- `packages/agents` for reusable agent definitions, evaluators, and model-facing orchestration
+- `packages/mastra` for Mastra runtime code, agents, tools, workflows, storage, memory, observability, scorers, and runtime routes
+- `packages/agents` for reusable non-Mastra agent definitions, evaluators, prompts, and tool wiring
 - `packages/mcp` or `packages/mcp-server` for MCP server contracts and transport code
 - `packages/cli` when the agent or ingestion surface needs a first-class command line
 
@@ -202,7 +209,7 @@ For a new product app, the default answer is usually:
 - Envy if runtime env exists
 - Storybook if shared UI exists
 - Fumadocs if the repo needs docs
-- Stow if the repo needs media storage
+- the house media storage packages if the repo needs media storage
 
 Only deviate when the product constraints actually justify it.
 

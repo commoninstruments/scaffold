@@ -2,7 +2,7 @@
 
 Use this sequence when creating a new repo.
 
-These defaults are tuned for the TypeScript, UI, data, agent, and package work that dominates the recent direct manifest inventory. Do not let legacy PHP/Craft dependencies influence the default shape of a new repo.
+These defaults are tuned for new TypeScript, UI, data, agent, and package work. Do not let legacy PHP/Craft dependencies influence the default shape of a new repo.
 
 ## 1. Choose the repo shape
 
@@ -42,9 +42,11 @@ If this is a full-stack product app rather than a simple UI shell:
 If the repo is AI-capable, agent-heavy, or ingestion-heavy:
 
 - use `@howells/ai` as the provider baseline before adding raw provider SDKs
-- add repo-local `ai`, `agents`, `mcp`, `cli`, `ingestion`, or `enrichment` packages based on real reuse boundaries
+- use `howells/motif` packages for fal.ai image generation, editing, utility media tools, and agent-facing creative automation
+- add repo-local `ai`, `mastra`, `agents`, `mcp`, `cli`, `ingestion`, or `enrichment` packages based on real reuse boundaries
 - use Mastra when the work is agent orchestration, memory, observability, or MCP-adjacent workflow, not for one-off model calls
 - use `zod` for tool, model IO, and transport contracts
+- use [Agentic Development](./reference/agentic-development.md) before scaffolding agent-facing surfaces
 
 ## 3. Create the baseline files first
 
@@ -105,10 +107,11 @@ For repos that will use Codex and Arc heavily:
 - add `AGENTS.md`
 - for Next.js UI repos, add `agentation` and render it in development only
 - add a local `.codex/config.toml` only when the repo benefits from project-specific MCP servers such as `agentation-mcp`
-- add `.ruler/` or rules only if you want enforced local standards
-- add `rules:apply` only when the repo really depends on that workflow
+- rely on Arc for structured delivery workflows such as vision, ideation, implementation, testing, review, audit, launch, refactor planning, and commit preparation
+- keep repo-local rules small; use project-specific instructions only when the repo has conventions Arc and the shared skills cannot infer
+- use independent skills from `~/Sites/skills` for specialist work such as UI polish, browser field testing, package extraction, boundary checks, naming, prose cleanup, and plugin packaging
 
-Do not cargo-cult the full `materia` rules system into every project.
+Do not cargo-cult a full rules or workflow system into every project. Start with `AGENTS.md`, then add only the workflow support the repo actually uses.
 
 ## 7. Verify the baseline before feature work
 
@@ -145,4 +148,4 @@ Use [Deployment Defaults](./reference/deployment-defaults.md) to choose between:
 
 - Vercel for Next.js apps, docs, and Storybook-like web surfaces
 - Railway for worker-heavy or service-heavy systems
-- Stow when the project has real media storage and delivery needs
+- the house media storage packages when the project has real media storage and delivery needs

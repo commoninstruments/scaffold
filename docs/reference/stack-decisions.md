@@ -1,8 +1,6 @@
 # Stack Decisions
 
-These are the current default decisions inferred from your most recently active projects and shared config repos.
-
-The direct inventory behind these decisions intentionally ignores PHP/Craft and generated dependency trees. The strongest signal is TypeScript product work: Next.js, React, Tailwind, Drizzle, Neon, Turbo, Vitest, Playwright, AI SDK, Mastra, and MCP. See [Observed Package Baseline](./observed-package-baseline.md) for the compact evidence.
+These are the current default decisions for new TypeScript product work and shared config repos.
 
 ## Core Versions
 
@@ -59,7 +57,7 @@ Use Turbo as an orchestrator, not as a place to hide complexity.
 - Put package-specific exceptions in leaf packages when needed.
 - Avoid deprecated `turbo run --parallel`; let persistent `dev` tasks run through task config.
 
-The recent pattern across `materia`, `sorrel`, `scenes`, and `colorscope` is clear: hidden stale-cache failures cost more than slower local runs.
+The recent pattern across active Turborepos is clear: hidden stale-cache failures cost more than slower local runs.
 
 ## TypeScript
 
@@ -222,14 +220,15 @@ For agent-heavy visual product work, there is also a repeated development tool:
 The repeated package names across your Turborepos are also clear enough to treat as default boundaries, not accidental patterns:
 
 - first tier: `db`, `ui`, `typescript-config`, `tailwind-config`
-- second tier: `utils`, `trpc`, `motion`, `auth`, `agents`, `mcp`, repo-local `ai` packages above `@howells/ai`
+- second tier: `utils`, `trpc`, `motion`, `auth`, `mastra`, `agents`, `mcp`, repo-local `ai` packages above `@howells/ai`
 - optional but frequent: `assets`, `upload`, `storage`, `env`, `config`
 
 The detailed policy lives in [Default Dependencies](./default-dependencies.md).
 
 For media-heavy projects, there is also a platform-level default:
 
-- prefer `stow` for image, vector, and general media storage/delivery
+- use `howells/motif` for image generation, editing, utility media tools, and agent-facing creative automation
+- prefer the house media storage platform for image, vector, and general media storage/delivery
 
 There is also a recurring architecture baseline for full-stack apps:
 
@@ -247,6 +246,7 @@ Default package choices:
 
 - `ai` for the Vercel AI SDK surface
 - `@howells/ai` for shared provider defaults and house wrappers
+- `howells/motif` packages when image generation, image editing, media utilities, CLI automation, or MCP image tools are part of the product
 - `zod` for structured model IO and tool schemas
 - `@mastra/core` and `mastra` when the repo needs agent orchestration, memory, observability, or workflow structure
 - `@modelcontextprotocol/sdk` when the repo exposes MCP tools, resources, or transports
@@ -255,11 +255,14 @@ Default package choices:
 Default boundaries:
 
 - `packages/ai` for repo-specific model/provider composition above `@howells/ai`
-- `packages/agents` for reusable product agents, evaluators, prompts, and tool wiring
+- `packages/mastra` for Mastra runtime code, agents, tools, workflows, storage, memory, observability, scorers, and runtime routes
+- `packages/agents` for reusable non-Mastra product agents, evaluators, prompts, and tool wiring
 - `packages/mcp` or `packages/mcp-server` for MCP contracts and server code
 - `packages/cli` when ingestion or model workflows need a real command line
 
 Do not scatter raw provider clients through app routes. Keep provider plumbing behind `@howells/ai` or a repo-local `packages/ai` boundary.
+
+Use [Agentic Development](./agentic-development.md) for Mastra, agentsurface.dev, MCP, tool design, workflows, memory, and observability guidance.
 
 ## Documentation
 

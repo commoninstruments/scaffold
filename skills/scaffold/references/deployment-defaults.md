@@ -26,7 +26,7 @@ If the repo has a real docs site:
 - use Fumadocs on Next.js
 - deploy on Vercel by default
 
-This already aligns with the docs-style surfaces in `colorscope`, `stow`, and similar projects.
+This already aligns with the docs-style surfaces in the current portfolio.
 
 ## When Vercel Is Not Enough
 
@@ -34,7 +34,7 @@ If the system becomes worker-heavy, cron-heavy, or multi-service:
 
 - shift the service-heavy parts toward Railway-style deployment
 
-This is the shape that shows up in `stow`:
+This is the shape that shows up in service-heavy media systems:
 
 - app and docs can still have web-oriented surfaces
 - workers and services become their own deployable units
@@ -59,11 +59,11 @@ Do not create a separate API app by reflex.
 
 If the repo has serious image, vector, or media behavior:
 
-- default to Stow for storage and delivery
+- default to the house media storage platform for storage and delivery
 
 This is a platform decision, not just a package decision.
 
-Use `@howells/stow-server` when the app needs a reusable typed integration layer.
+Use `@howells/stow-server` when the app needs a reusable typed media storage integration layer.
 
 ## Preview Environments
 
@@ -104,7 +104,7 @@ The deploy should fail before it reaches the provider if required env is missing
 - Next.js app or docs surface: Vercel
 - Storybook surface: Vercel
 - worker-heavy or service-heavy backend: Railway-style deployment
-- media storage and delivery: Stow
+- media storage and delivery: house media storage platform plus the relevant `@howells/*` integration package
 - runtime env preflight: Envy
 
 That is the default unless the repo has a concrete reason to deviate.

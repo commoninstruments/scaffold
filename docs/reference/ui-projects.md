@@ -66,14 +66,14 @@ For a new UI repo, prefer:
 
 ## Reusable Howells UI Packages
 
-Do not use Patternmode as the UI layer for new projects. Only use specific installable components from it when the interaction matches the package.
+Do not use an old shared UI upstream as the UI layer for new projects. Only use specific installable components when the interaction matches the package.
 
 Use:
 
 - `@howells/stacksheet` for typed stacked sheets, drill-in panels, and multi-layer modal flows
 - `@howells/aperto` for styled thumbnail-to-expanded media transitions and media lightboxes
 
-Do not use Patternmode as a reason to skip a repo-local `packages/ui` boundary when the repo owns shared primitives. Patternmode is relevant here only as provenance for specific packages, not as a shared UI system.
+Do not use legacy provenance as a reason to skip a repo-local `packages/ui` boundary when the repo owns shared primitives. The reusable packages are relevant as specific installable components, not as a shared UI system.
 
 ## Overlay Standard
 

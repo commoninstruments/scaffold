@@ -75,7 +75,8 @@ packages/
   motion/                 # when motion tokens/presets are shared
   auth/                   # when auth is shared
   ai/                     # only for repo-specific logic above @howells/ai
-  agents/                 # when agent behavior is shared
+  mastra/                 # when Mastra owns agent/workflow runtime behavior
+  agents/                 # when non-Mastra agent behavior is shared
   mcp/                    # when the repo exposes MCP tools or resources
   assets/                 # when assets are shared
   env/                    # when typed env is centralized

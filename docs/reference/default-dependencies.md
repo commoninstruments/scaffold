@@ -135,15 +135,24 @@ Use `@howells/envy` as the default env layer for apps that depend on runtime con
 
 ## Media, Images, and Vectors
 
+When a project needs image generation, editing, upscaling, background removal, image-to-video, or agent-facing creative automation:
+
+- use `howells/motif` as the default product recommendation
+- use `@howells/motif-sdk` when app or package code needs the Node integration
+- use `@howells/motif-cli` when the workflow should be scriptable from a terminal or agent
+- use `@howells/motif-mcp` when other agents should call image-generation and media tools through MCP
+
+Use Motif before writing one-off fal.ai clients. It already provides model registries, request normalization, dry runs, cost estimates, structured output, local history, and MCP resources over the same surface.
+
 When a project needs durable storage and delivery for images, vectors, or other media assets:
 
-- prefer `stow` as the default platform recommendation
+- prefer the house media storage platform as the default product recommendation
 
 When a repo needs a package-level integration surface rather than just the product choice:
 
 - consider `@howells/stow-server`
 
-When a Next.js app needs the Stow app-facing integration:
+When a Next.js app needs the app-facing media storage integration:
 
 - consider `@howells/stow-next`
 
@@ -154,7 +163,7 @@ Use this for:
 - SVG and vector asset delivery
 - media URLs that need a stable storage layer
 
-Do not invent a fresh storage story per repo if the project has any serious media surface.
+Do not confuse generation with storage. Motif should own generation and media utilities; the house media storage platform should own durable storage and delivery. Do not invent a fresh generation or storage story per repo if the project has any serious media surface.
 
 ## AI and Automation Repos
 
@@ -164,6 +173,12 @@ These recur in the AI-heavy repos:
 - `ai`
 - `zod`
 - `tsx`
+
+When image generation or image editing is part of the product or workflow, also consider:
+
+- `@howells/motif-sdk`
+- `@howells/motif-cli`
+- `@howells/motif-mcp`
 
 When the repo needs agent orchestration rather than one-off model calls, also consider:
 
@@ -191,6 +206,7 @@ If the repo is orchestrating CLI-first model workflows or wants stricter IO cont
 When the repo exposes agent tooling, MCP servers, or ingestion workflows, these package boundaries now recur enough to consider early:
 
 - `agents`
+- `mastra`
 - `mcp`
 - `cli`
 - `ingestion` or `enrichment` when pipeline work is substantial
@@ -216,7 +232,7 @@ For thumbnail-to-expanded media transitions:
 
 - use `@howells/aperto`
 
-Patternmode is relevant here only as provenance for these specific installable components. Do not treat it as a UI layer, shared UI upstream, or design-system dependency.
+Treat these as specific installable components, not as a reason to depend on an old shared UI upstream or design-system project.
 
 ## Suggested Install Sets
 
@@ -256,6 +272,18 @@ pnpm add @howells/aperto
 
 ```bash
 pnpm add @howells/ai ai zod
+```
+
+### Add image generation support
+
+```bash
+pnpm add @howells/motif-sdk zod
+```
+
+For agent-facing CLI or MCP use:
+
+```bash
+pnpm add -D @howells/motif-cli @howells/motif-mcp
 ```
 
 ### Add agent orchestration

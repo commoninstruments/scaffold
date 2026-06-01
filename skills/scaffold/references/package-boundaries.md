@@ -121,12 +121,14 @@ Use when:
 
 This shows up often enough that it should be a deliberate choice when a repo has more than one surface.
 
+Generated asset metadata can point at Motif runs, model IDs, prompts, references, or output files, but do not put Motif client implementation here. Keep generation calls in `packages/ai`, `packages/agents`, `packages/mastra`, `packages/mcp`, or a product service that uses `@howells/motif-sdk`.
+
 ### `packages/upload` or `packages/storage`
 
 Use when:
 
 - the repo has serious upload or media behavior
-- `stow` integration is not isolated to one small feature
+- media storage integration is not isolated to one small feature
 
 ### `packages/ai`
 
@@ -137,6 +139,8 @@ Use when:
 
 Use `@howells/ai` as the shared baseline before creating fresh provider wrappers here. This package can compose `ai`, provider adapters, model registries, and app-specific structured-output helpers, but it should not become a place for domain business logic.
 
+When repo-specific image generation belongs with the model layer, use `@howells/motif-sdk` here instead of raw fal.ai clients.
+
 ### `packages/agents`
 
 Use when:
@@ -146,7 +150,22 @@ Use when:
 
 Keep provider setup behind `@howells/ai`; this package should own product-specific agent behavior.
 
-Use Mastra here when the repo needs actual agent/workflow structure. Do not add Mastra for a single prompt or a simple server action.
+Use this for non-Mastra agent assets. When Mastra owns runtime orchestration, prefer `packages/mastra`.
+
+### `packages/mastra`
+
+Use when:
+
+- the repo needs Mastra agents, tools, workflows, memory, storage, observability, scorers, processors, or Studio inspection
+- agent behavior is more than a single prompt or simple server action
+- workflows need durable runs, traces, or background execution
+- app code needs to dispatch jobs to a local or remote Mastra runtime
+
+Keep `packages/mastra` organized by runtime concern: `agents`, `tools`, `workflows`, `schemas`, `prompts`, `runtime`, `observability`, `scorers`, and `processors`.
+
+App routes and React components should not import Mastra internals. Put dispatch and polling behind product services, and expose only deliberate package exports.
+
+See [Agentic Development](./agentic-development.md) before adding this package.
 
 ### `packages/mcp` or `packages/mcp-server`
 
@@ -158,6 +177,8 @@ Use when:
 Do not bury MCP server contracts inside a web app route if another surface needs to consume or test them.
 
 Use `@modelcontextprotocol/sdk` here rather than hand-rolling protocol objects.
+
+For image-generation tools, prefer wrapping or configuring `@howells/motif-mcp` before creating a fresh MCP server surface.
 
 ### `packages/cli`
 
@@ -232,6 +253,6 @@ If you do nothing else right, get these boundaries right first:
 5. `trpc`
 6. `motion`
 7. `env`
-8. `ai` / `agents` / `mcp` when agent behavior is part of the product
+8. `ai` / `mastra` / `agents` / `mcp` when agent behavior is part of the product
 
 That is where the portfolio already shows a durable pattern.
