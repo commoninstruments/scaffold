@@ -79,16 +79,6 @@ Use independent skills when a task is cross-repo and specialist:
 
 Do not copy an independent skill's instructions into every repo. Install or invoke the skill when the task needs it, and keep repo-local `AGENTS.md` focused on the current codebase.
 
-## Agentation
-
-For Next.js UI repos that will be iterated visually with agents:
-
-- add `agentation`
-- render `<Agentation />` only in development
-- add assistant-specific MCP config for `agentation-mcp` when the repo wants annotation syncing inside the project
-
-This is now recurring often enough in active product repos that it should be treated as a standard option, not a one-off experiment.
-
 ## AI, Mastra, and MCP
 
 For AI-capable repos, keep the agent surface explicit:

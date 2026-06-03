@@ -23,7 +23,7 @@ Usually include these too:
 
 - `@howells/envy` when the repo has runtime environment variables
 - `knip` when the repo has enough package surface for dependency drift to matter
-- `ultracite` when you want the stricter house lint/check layer in addition to Biome
+- `ultracite` only when developing lint presets inside `@howells/lint`
 
 ## Every UI Repo
 
@@ -63,10 +63,6 @@ If the repo exports shared UI, also include:
 - `@testing-library/jest-dom`
 - `@testing-library/user-event`
 - `@playwright/test`
-
-If the repo will be iterated visually with agents during development, also include:
-
-- `agentation`
 
 ## Shared UI Package Baseline
 
@@ -246,7 +242,7 @@ pnpm add -D @howells/lint @howells/typescript-config turbo typescript husky lint
 
 ```bash
 pnpm add -D @howells/lint @howells/typescript-config turbo typescript husky lint-staged tsx vitest
-pnpm add next react react-dom tailwindcss @tailwindcss/postcss motion lucide-react zod clsx tailwind-merge sonner @tanstack/react-query next-themes date-fns usehooks-ts nuqs agentation @howells/envy
+pnpm add next react react-dom tailwindcss @tailwindcss/postcss motion lucide-react zod clsx tailwind-merge sonner @tanstack/react-query next-themes date-fns usehooks-ts nuqs @howells/envy
 ```
 
 When the repo exports reusable UI, also add Storybook and browser/component test tooling:
@@ -335,6 +331,4 @@ These are the strongest repeated dependencies from the scan of active repos:
 - `@howells/aperto`
 - `@howells/stow-server`
 - `@howells/stow-next`
-- `agentation`
-
 That does not mean every repo needs all of them. It means they should be your default shortlist, not re-litigated from zero each time.

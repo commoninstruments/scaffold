@@ -7,21 +7,23 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "howells-biome check src --write --unsafe",
+    "lint": "howells-ox-check src",
+    "lint:fix": "howells-ox-fix src",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
-    "motion": "^12.38.0"
+    "motion": "^12.40.0"
   },
   "devDependencies": {
-    "@howells/typescript-config": "^0.1.0",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "typescript": "^5.9.3"
+    "@howells/typescript-config": "^0.1.6",
+    "@howells/lint": "^0.2.1",
+    "@types/react": "^19.2.16",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   }
 }

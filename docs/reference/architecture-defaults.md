@@ -10,7 +10,7 @@ These defaults intentionally ignore PHP/Craft maintenance surfaces. The useful s
 
 For a serious TypeScript product app, the recurring stack is:
 
-- Next.js App Router
+- Next.js 16.2 App Router
 - `tRPC` for the typed API layer
 - `@tanstack/react-query` for client data orchestration
 - Drizzle for the database layer

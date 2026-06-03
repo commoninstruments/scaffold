@@ -7,18 +7,18 @@ It is not a generic starter guide. It reflects the conventions that are already 
 - the bundled UI baseline for shared UI, tokens, motion, and Storybook
 - Arc for the software delivery lifecycle across vision, ideation, implementation, testing, review, audit, launch, and commit workflows
 - the independent skills collection for specialist work that should not live inside one product repo
-- `@howells/lint` for Biome presets and pinned lint tooling
+- `@howells/lint` for pinned Oxlint/Oxfmt linting and formatting
 - `@howells/typescript-config` for thin, explicit tsconfig presets
 - `@howells/envy` for typed env parsing and deployment env checks
 - `@howells/ai`, Mastra, and MCP packages for AI-capable product and agent work
 - `howells/motif` packages for image generation, image editing, utility media tools, and agent-facing creative automation
-- `turbo-config` for conservative Turborepo defaults
+- conservative Turborepo defaults through the root `turbo.json` snippet
 
 ## Defaults
 
 - Default repo shape: `pnpm` monorepo, usually with `apps/*` and `packages/*`
-- Default UI stack: Next.js App Router, React 19, Tailwind 4, Radix, and Storybook when the repo exports reusable UI
-- Default linting and formatting: Biome via `@howells/lint`
+- Default UI stack: Next.js 16.2 App Router, React 19.2, Tailwind CSS 4.3, Radix, and Storybook when the repo exports reusable UI
+- Default linting and formatting: prefer the `@howells/lint` Oxlint/Oxfmt lane
 - Default task runner: Turborepo with cache disabled until a repo proves it is deterministic
 - Default data stack for product apps: Drizzle, Neon, `tRPC`, and React Query
 - Default AI-capable shape: shared provider baseline through `@howells/ai`, image generation through `howells/motif`, product orchestration through repo-local `ai` or `agents`, and MCP in its own package when exposed

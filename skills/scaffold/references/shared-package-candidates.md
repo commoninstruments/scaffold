@@ -7,7 +7,7 @@ This section separates packages that are already real shared assets from pattern
 These should be treated as canonical shared packages now:
 
 - `@howells/lint`
-  - pinned Biome and Ultracite presets
+  - pinned Oxlint/Oxfmt, Biome, Ultracite, and React Doctor presets
 - `@howells/typescript-config`
   - explicit thin tsconfig presets
 - `@howells/stacksheet`
@@ -139,7 +139,7 @@ For new projects, the default decision should be:
 
 If you want to reduce duplicated package work across the portfolio, the best order is:
 
-1. keep using `@howells/lint` and `@howells/typescript-config` everywhere
+1. prefer `@howells/lint` and `@howells/typescript-config` everywhere
 2. use `@howells/envy` for repo-local env boundaries instead of creating more package-specific env tooling
 3. keep `@howells/ai` as the shared AI/provider baseline instead of scattering raw provider clients
 4. use `howells/motif` for image generation and media utility workflows instead of scattering raw fal.ai clients

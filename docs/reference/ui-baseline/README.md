@@ -8,7 +8,7 @@ Treat this as scaffold-owned reference material, not as an external upstream dep
 
 - `source/packages/motion` for durations, easings, springs, scales, and motion presets.
 - `source/packages/transition` for shared transition primitives and preset structure.
-- `source/packages/tailwind-config` for the Tailwind 4 shared stylesheet and token wiring.
+- `source/packages/tailwind-config` for the Tailwind CSS 4.3 shared stylesheet and token wiring.
 - `source/packages/ui/README.md` for the intended component package shape.
 - `source/docs/design-context.md` and `source/docs/arc/specs` for the visual and architectural rationale behind the baseline.
 - `source/apps/web/content/docs` for the old docs copy around installation, tokens, motion, and responsive behavior.

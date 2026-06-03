@@ -8,11 +8,13 @@
     "./*": "./src/*.ts"
   },
   "scripts": {
-    "lint": "howells-biome check src --write --unsafe",
+    "lint": "howells-ox-check src",
+    "lint:fix": "howells-ox-fix src",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@howells/typescript-config": "^0.1.0",
-    "typescript": "^5.9.3"
+    "@howells/typescript-config": "^0.1.6",
+    "@howells/lint": "^0.2.1",
+    "typescript": "^6.0.3"
   }
 }

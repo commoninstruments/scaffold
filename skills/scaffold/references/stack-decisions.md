@@ -8,22 +8,22 @@ Pin these unless there is a deliberate repo-specific reason not to:
 
 | Tool | Baseline |
 |------|----------|
-| `pnpm` | `10.23.0` |
-| `turbo` | `2.9.12` |
+| `pnpm` | `11.5.1` |
+| `turbo` | `2.9.16` |
 | `typescript` | `6.0.3` |
 | `husky` | `9.1.7` |
-| `lint-staged` | `17.0.4` |
-| `@howells/lint` | `0.1.6` |
-| `@howells/typescript-config` | `0.1.2` |
-| `@howells/envy` | `0.3.5` |
-| Node | `24.x` LTS for new repos |
+| `lint-staged` | `17.0.7` |
+| `@howells/lint` | `0.2.1` |
+| `@howells/typescript-config` | `0.1.6` |
+| `@howells/envy` | `0.3.7` |
+| Node | `24.16.0` LTS for new repos |
 
 ## Package Manager
 
 - Use `pnpm`.
 - Pin `packageManager` in the root `package.json`.
 - Prefer one lockfile at the repo root.
-- Treat `pnpm@10.23.0` as the settled baseline until a deliberate cross-repo move to pnpm 11 is made.
+- Treat `pnpm@11.5.1` as the settled baseline.
 - Use Node 24 LTS for development, CI, apps, and services.
 - Default workspace layout is:
 
@@ -39,10 +39,10 @@ Use Node 24 LTS as the Howells stack baseline.
 
 Defaults:
 
-- app and service repos: `"node": ">=24.15.0 <25"`
+- app and service repos: `"node": ">=24.16.0 <25"`
 - CI: Node `24.x`
 - local version files: pin the latest Node 24 LTS patch
-- published packages: keep runtime support at `>=22.22.1` when the package does not need Node 24 APIs, but build and test on Node 24
+- published packages: keep runtime support at `>=22.22.3` when the package does not need Node 24 APIs, but build and test on Node 24
 
 Do not start new work on Node 20. It is end-of-life. Do not standardize on Node 26 until it reaches LTS.
 
@@ -77,22 +77,24 @@ Rules:
 
 ## Linting and Formatting
 
-Use Biome as the single source of truth via `@howells/lint`.
+Prefer the Oxlint/Oxfmt lane through `@howells/lint`.
 
 Default preset selection:
 
-- non-React or server repo: `@howells/lint/biome/core`
-- React package: `@howells/lint/biome/react`
-- Next.js app: `@howells/lint/biome/next`
+- non-React or server repo: `@howells/lint/oxlint/core`
+- React package: `@howells/lint/oxlint/react`
+- Next.js app: `@howells/lint/oxlint/next`
+- formatting: `@howells/lint/oxfmt`
 
 Rules:
 
 - avoid repo-local lint wrappers unless the repo has a genuinely unique constraint
+- do not install direct `oxlint`, `oxfmt`, Biome, Prettier, or ESLint dependencies in consumer repos
+- use `howells-ox-check`, `howells-ox-fix`, `howells-oxlint`, and `howells-oxfmt` instead of raw tool binaries
 - prefer inline suppressions over broad config weakening
 - keep format and lint behavior consistent across repos
-- keep the Biome schema URL aligned to the Biome version pinned by `@howells/lint`
 
-For env access, use `@howells/envy` lint helpers with Oxlint or ESLint when a repo needs to enforce "no direct `process.env`" more strongly than Biome can on its own.
+For env access, use `@howells/envy` lint helpers with Oxlint when a repo needs to enforce "no direct `process.env`" strongly.
 
 ## Environment Variables
 
@@ -125,9 +127,9 @@ Across recent repos, the stable baseline is small hooks plus standard root scrip
 
 For new UI repos:
 
-- Next.js App Router
-- React 19
-- Tailwind CSS 4
+- Next.js 16.2 App Router
+- React 19.2
+- Tailwind CSS 4.3
 - Radix primitives
 - `motion` for animation, imported from `motion/react` in React code
 - Storybook for reusable exported components
@@ -212,10 +214,6 @@ The packages that recur most often in UI work are:
 - `@radix-ui/react-slot`
 - `@radix-ui/react-dialog`
 - `@howells/envy`
-
-For agent-heavy visual product work, there is also a repeated development tool:
-
-- `agentation`
 
 The repeated package names across your Turborepos are also clear enough to treat as default boundaries, not accidental patterns:
 

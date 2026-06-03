@@ -4,12 +4,12 @@ Use this when starting a new repo or standardizing an existing one.
 
 ## Baseline
 
-- `packageManager` pinned to the settled house pnpm line, currently `pnpm@10.23.0`
-- Node engine pinned to `>=24.15.0 <25` for apps and services
+- `packageManager` pinned to the settled house pnpm line, currently `pnpm@11.5.1`
+- Node engine pinned to `>=24.16.0 <25` for apps and services
 - `.node-version` pins the current Node 24 LTS patch
-- `turbo` pinned to `2.9.12`
+- `turbo` pinned to `2.9.16`
 - `typescript` pinned to `6.0.3`
-- `lint-staged` pinned to `17.0.4`
+- `lint-staged` pinned to `17.0.7`
 - `@howells/lint` installed
 - `@howells/typescript-config` installed
 - `@howells/envy` installed when runtime env exists
@@ -21,7 +21,7 @@ Use this when starting a new repo or standardizing an existing one.
 - root `package.json` uses the standard script contract
 - `pnpm-workspace.yaml` is present
 - `turbo.json` is present and small
-- `biome.json` extends house presets
+- `oxlint.config.ts` and `oxfmt.config.ts` use `@howells/lint` presets when the repo needs explicit lint or format configuration
 - `tsconfig.json` uses explicit leaf presets
 - `components.json` exists for UI repos
 - `.husky/pre-commit` is installed
@@ -64,7 +64,7 @@ Use this when starting a new repo or standardizing an existing one.
 - cache is disabled by default in Turbo tasks
 - task-level env is scoped narrowly
 - env parsing and provider checks use `@howells/envy` when the repo has runtime env
-- there is no generic local lint wrapper drifting away from `@howells/lint`
+- there is no direct `oxlint`, `oxfmt`, Biome, Prettier, or ESLint dependency drifting away from `@howells/lint`
 - there is no generic local tsconfig base hiding runtime assumptions
 - there is no duplicate component system growing beside `packages/ui` in a new UI repo
 - there is no second local motion/transition mini-framework appearing without a strong reason

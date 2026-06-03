@@ -23,13 +23,13 @@ Before creating files, choose the repo archetype from [Repo Archetypes](./refere
 If the project ships a UI:
 
 - start from the bundled UI baseline in [UI Projects](./reference/ui-projects.md)
-- default to Next.js App Router
+- default to Next.js 16.2 App Router
 - keep shared primitives in a package, not in the app
 - include Storybook when the repo exports reusable UI
 
 If the project is not UI-first:
 
-- still use the same `pnpm`, TypeScript, Biome, Husky, and Turbo baseline
+- still use the same `pnpm`, TypeScript, Oxlint/Oxfmt, Husky, and Turbo baseline
 - prefer thinner workspace structure and fewer packages
 
 If this is a full-stack product app rather than a simple UI shell:
@@ -56,7 +56,8 @@ Start with these files before writing app code:
 - `.node-version`
 - `pnpm-workspace.yaml`
 - `turbo.json`
-- `biome.json`
+- `oxlint.config.ts`
+- `oxfmt.config.ts`
 - `tsconfig.json`
 - `components.json` for UI repos
 - `.husky/pre-commit`
@@ -80,7 +81,7 @@ For the current house baseline:
 - `vitest`
 - `@howells/envy` when the repo has runtime env
 
-Do not start by hand-rolling repo-local lint or tsconfig wrappers.
+Do not install direct `oxlint` or `oxfmt` dependencies. Use the `@howells/lint` Oxlint/Oxfmt lane.
 
 ## 5. Keep the scripts standard
 
@@ -105,8 +106,7 @@ The exact commands can vary by repo, but the script contract should stay stable.
 Every repo should have a concise `AGENTS.md`. Add platform-specific agent configuration only when the repo will actually use that assistant or tool surface.
 
 - keep `AGENTS.md` short and focused on repo-specific constraints
-- for Next.js UI repos, add `agentation` and render it in development only
-- add assistant-specific MCP config only when the repo benefits from project-specific MCP servers such as `agentation-mcp`
+- add assistant-specific MCP config only when the repo benefits from project-specific servers
 - rely on Arc for structured delivery workflows such as vision, ideation, implementation, testing, review, audit, launch, refactor planning, and commit preparation
 - keep repo-local rules small; use project-specific instructions only when the repo has conventions Arc and the shared skills cannot infer
 - use independent skills from `~/Sites/skills` for specialist work such as UI polish, browser field testing, package extraction, boundary checks, naming, prose cleanup, and plugin packaging

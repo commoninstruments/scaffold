@@ -56,9 +56,9 @@ The structural baseline is bundled in this scaffold. The aesthetic layer remains
 
 For a new UI repo, prefer:
 
-- Next.js App Router
-- React 19
-- Tailwind CSS 4
+- Next.js 16.2 App Router
+- React 19.2
+- Tailwind CSS 4.3
 - Radix primitives
 - `motion`
 - `lucide-react`

@@ -10,13 +10,14 @@ Adjust names and filters, but do not casually change the overall contract.
 {
   "name": "my-project",
   "private": true,
-  "packageManager": "pnpm@10.23.0",
+  "packageManager": "pnpm@11.5.1",
   "scripts": {
     "dev": "turbo run dev --filter=web",
     "dev:all": "turbo run dev",
     "build": "turbo run build",
-    "lint": "turbo run lint",
-    "format": "howells-biome format --write .",
+    "lint": "turbo run lint && howells-workspace-check",
+    "lint:fix": "turbo run lint:fix && howells-workspace-fix",
+    "format": "howells-ox-fix .",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
@@ -25,20 +26,21 @@ Adjust names and filters, but do not casually change the overall contract.
     "prepare": "husky"
   },
   "devDependencies": {
-    "@howells/lint": "^0.1.6",
-    "@howells/typescript-config": "^0.1.2",
+    "@howells/lint": "^0.2.1",
+    "@howells/typescript-config": "^0.1.6",
     "husky": "9.1.7",
-    "lint-staged": "17.0.4",
-    "tsx": "^4.22.0",
-    "turbo": "2.9.12",
+    "lint-staged": "17.0.7",
+    "tsx": "^4.22.4",
+    "turbo": "2.9.16",
     "typescript": "6.0.3",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.8"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,json,jsonc,css,md}": "howells-biome format --write --no-errors-on-unmatched"
+    "*.{js,ts,jsx,tsx}": "howells-ox-fix",
+    "*.{json,jsonc,css,md}": "howells-oxfmt --write"
   },
   "engines": {
-    "node": ">=24.15.0 <25"
+    "node": ">=24.16.0 <25"
   }
 }
 ```
@@ -47,13 +49,13 @@ Notes:
 
 - replace `web` with the primary app package when needed
 - if `test` is expensive, keep `check` light and create a heavier CI-only job
-- `pnpm@10.23.0` is the observed majority baseline; move to pnpm 11 only as an intentional cross-repo update
-- for published packages that can support Node 22, use `"node": ">=22.22.1"` in the package itself while keeping repo tooling on Node 24
+- `pnpm@11.5.1` is the current house baseline
+- for published packages that can support Node 22, use `"node": ">=22.22.3"` in the package itself while keeping repo tooling on Node 24
 
 ## `.node-version`
 
 ```text
-24.15.0
+24.16.0
 ```
 
 Keep local development, CI, and deployment runtimes on Node 24 LTS. Do not use Node 26 for the house baseline until it reaches LTS.
@@ -111,7 +113,7 @@ If the repo genuinely needs extra workspaces such as `scripts/*`, add them expli
 
 ```json
 {
-  "$schema": "https://turbo.build/schema.json",
+  "$schema": "https://turborepo.dev/schema.json",
   "ui": "stream",
   "globalDependencies": ["**/.env", "**/.env.local"],
   "tasks": {
@@ -134,6 +136,9 @@ If the repo genuinely needs extra workspaces such as `scripts/*`, add them expli
     "lint": {
       "cache": false
     },
+    "lint:fix": {
+      "cache": false
+    },
     "typecheck": {
       "cache": false
     },
@@ -151,43 +156,30 @@ If the repo genuinely needs extra workspaces such as `scripts/*`, add them expli
 
 Only add task-level `env` when a task actually needs it.
 
-## Root `biome.json`
+## Root `oxlint.config.ts`
 
 For a Next.js monorepo:
 
-```json
-{
-  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
-  "extends": [
-    "@howells/lint/biome/core",
-    "@howells/lint/biome/react",
-    "@howells/lint/biome/next"
-  ],
-  "files": {
-    "includes": [
-      "apps/**",
-      "packages/**",
-      "*.json",
-      "*.md",
-      "!**/.next/**",
-      "!**/dist/**",
-      "!**/storybook-static/**"
-    ]
-  },
-  "root": true
-}
+```ts
+import { defineConfig } from "oxlint";
+import next from "@howells/lint/oxlint/next";
+
+export default defineConfig({
+  extends: [next],
+});
 ```
 
-The schema URL should track the Biome version pinned by `@howells/lint`. Do not bump it separately from the house lint package.
+For a non-UI or mixed repo, start with `@howells/lint/oxlint/core` or add targeted overrides.
 
-For a non-UI or mixed repo, start with just:
+## Root `oxfmt.config.ts`
 
-```json
-{
-  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
-  "extends": ["@howells/lint/biome/core"],
-  "root": true
-}
+```ts
+import { defineConfig } from "oxfmt";
+import howells from "@howells/lint/oxfmt";
+
+export default defineConfig({
+  extends: [howells],
+});
 ```
 
 ## Root `tsconfig.json`
@@ -317,41 +309,6 @@ export const envSchema = defineEnv({
 ```
 
 For provider checks, prefer Envy's Vercel or Railway adapters over hand-written shell scripts.
-
-## Assistant MCP config for Agentation
-
-Use assistant-specific MCP config only for repos that want project-local Agentation MCP wiring. For Codex:
-
-```toml
-[mcp_servers.agentation]
-command = "npx"
-args = ["-y", "agentation-mcp", "server"]
-```
-
-## Next.js root layout snippet for Agentation
-
-For App Router repos that use Agentation in development:
-
-```tsx
-import { Agentation } from "agentation";
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
-        {process.env.NODE_ENV === "development" && <Agentation />}
-      </body>
-    </html>
-  );
-}
-```
-
-Not every repo should have this.
 
 ## Minimal `AGENTS.md`
 

@@ -1,6 +1,6 @@
 ---
 name: scaffold
-description: Create or standardize a new Howells project using the scaffold baseline for repo archetypes, pnpm/Turborepo/Biome/TypeScript configuration, package boundaries, UI stack, data and AI defaults, agent workflow, deployment defaults, and launch readiness. Use when starting a new repo, bringing an existing repo onto Howells conventions, choosing a project archetype, drafting baseline files, generating setup plans, or checking a repo against the scaffold launch checklist.
+description: Create or standardize a new Howells project using the scaffold baseline for repo archetypes, pnpm/Turborepo/@howells/lint Oxlint/Oxfmt/TypeScript configuration, package boundaries, UI stack, data and AI defaults, agent workflow, deployment defaults, and launch readiness. Use when starting a new repo, bringing an existing repo onto Howells conventions, choosing a project archetype, drafting baseline files, generating setup plans, or checking a repo against the scaffold launch checklist.
 ---
 
 # Scaffold
@@ -19,7 +19,7 @@ Load only the references needed for the current task:
 - `references/default-dependencies.md` for package selection.
 - `references/config-snippets.md` when generating baseline files.
 - `references/ui-projects.md` for UI baseline decisions.
-- `references/agent-workflow.md` for AGENTS.md, Arc, and Agentation setup.
+- `references/agent-workflow.md` for AGENTS.md, Arc, and assistant workflow setup.
 - `references/agentic-development.md` for agentsurface.dev, Mastra, MCP, tools, workflows, memory, observability, and agent-facing software.
 - `references/deployment-defaults.md` for hosting/runtime decisions.
 - `references/shared-package-candidates.md` when deciding what should become shared.
@@ -42,7 +42,8 @@ When invoked:
    - `package.json`
    - workspace config
    - `turbo.json`
-   - `biome.json`
+   - `oxlint.config.ts`
+   - `oxfmt.config.ts`
    - `tsconfig.json`
    - app/package folders
    - `AGENTS.md`
