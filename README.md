@@ -6,6 +6,6 @@ This repo is intentionally docs-first. It captures the shared baseline that is a
 
 Start with [docs/README.md](docs/README.md).
 
-## Skill
+## Agent Skill
 
-This repo also contains an installable Codex skill at `skills/scaffold`. Use it when an agent should apply these defaults to a new or existing project.
+This repo also contains an installable agent skill at `skills/scaffold`. Use it when a supported coding assistant should apply these docs to a new or existing project.

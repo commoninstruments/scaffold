@@ -102,16 +102,16 @@ The exact commands can vary by repo, but the script contract should stay stable.
 
 ## 6. Add the agent and rules layer deliberately
 
-For repos that will use Codex and Arc heavily:
+Every repo should have a concise `AGENTS.md`. Add platform-specific agent configuration only when the repo will actually use that assistant or tool surface.
 
-- add `AGENTS.md`
+- keep `AGENTS.md` short and focused on repo-specific constraints
 - for Next.js UI repos, add `agentation` and render it in development only
-- add a local `.codex/config.toml` only when the repo benefits from project-specific MCP servers such as `agentation-mcp`
+- add assistant-specific MCP config only when the repo benefits from project-specific MCP servers such as `agentation-mcp`
 - rely on Arc for structured delivery workflows such as vision, ideation, implementation, testing, review, audit, launch, refactor planning, and commit preparation
 - keep repo-local rules small; use project-specific instructions only when the repo has conventions Arc and the shared skills cannot infer
 - use independent skills from `~/Sites/skills` for specialist work such as UI polish, browser field testing, package extraction, boundary checks, naming, prose cleanup, and plugin packaging
 
-Do not cargo-cult a full rules or workflow system into every project. Start with `AGENTS.md`, then add only the workflow support the repo actually uses.
+Do not cargo-cult a full rules or workflow system into every project. Start with `AGENTS.md`, then add only the Codex, Claude Code, Cursor, MCP, or workflow support the repo actually uses.
 
 ## 7. Verify the baseline before feature work
 

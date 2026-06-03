@@ -1,6 +1,6 @@
 # Agent Workflow
 
-This is the baseline for repos that will be worked on with Codex, Arc, and reusable specialist skills.
+This is the baseline for repos that will be worked on with coding assistants, Arc, and reusable specialist skills. Supported assistants should include Codex, Claude Code, and Cursor through platform-specific wrappers or commands.
 
 ## AGENTS.md
 
@@ -31,7 +31,7 @@ Current Arc entry points:
 - `/arc:launch` for go-live and shareability readiness
 - `/arc:commit` for clean atomic commits, with push or publish only when requested
 
-In Codex, the same workflows may be available as skills such as `$ideate`, `$implement`, `$review`, `$audit`, `$refactor`, `$testing`, `$launch`, and `$commit`.
+In some assistants, the same workflows may be available as skills or commands such as `$ideate`, `$implement`, `$review`, `$audit`, `$refactor`, `$testing`, `$launch`, and `$commit`.
 
 Arc's current full runtime is more than prompt text. It includes:
 
@@ -42,7 +42,7 @@ Arc's current full runtime is more than prompt text. It includes:
 - `references/` for Arc-owned architecture, testing, review, platform, and delivery guidance
 - `rules/`, `templates/`, `scripts/`, and tests for workflow support
 
-Prefer the full Codex install for repos where agent workflows are central. The supported install clones Arc into `~/.codex/arc`, symlinks Arc skills into `~/.codex/skills`, and mirrors those skill links into `~/.agents/skills` for compatibility. Prompt-only installs are acceptable for lightweight routing, but they do not include Arc's bundled agents, references, disciplines, templates, scripts, or rules.
+Prefer the full Arc install for repos where agent workflows are central. Arc should expose the same lifecycle guidance through each supported assistant rather than maintaining separate hand-written workflow forks. Prompt-only installs are acceptable for lightweight routing, but they do not include Arc's bundled agents, references, disciplines, templates, scripts, or rules.
 
 Arc's specialist agents are support machinery. Users should normally start with a lifecycle workflow, not a specialist agent. Completed workflow activity may be logged to `.arc/log.md`; keep that as local operational history rather than product documentation.
 
@@ -52,9 +52,9 @@ Do not route specialist work through Arc just because Arc exists. Arc owns the d
 
 `~/Sites/skills` is the independent skill collection. Treat it as reusable agent tooling, not as a package inside each product repo.
 
-Install or update independent skills through the skill installer, usually globally for Codex. Do not vendor the skill sources into product repositories, and do not paste their full instructions into repo-local `AGENTS.md` files.
+Install or update independent skills through the skill installer, usually globally for the assistant doing the work. Do not vendor the skill sources into product repositories, and do not paste their full instructions into repo-local `AGENTS.md` files.
 
-Common install forms:
+Common Codex install forms:
 
 ```bash
 npx skills@latest add howells/skills --list
@@ -85,7 +85,7 @@ For Next.js UI repos that will be iterated visually with agents:
 
 - add `agentation`
 - render `<Agentation />` only in development
-- add a local `.codex/config.toml` entry for `agentation-mcp` when the repo wants annotation syncing inside the project
+- add assistant-specific MCP config for `agentation-mcp` when the repo wants annotation syncing inside the project
 
 This is now recurring often enough in active product repos that it should be treated as a standard option, not a one-off experiment.
 

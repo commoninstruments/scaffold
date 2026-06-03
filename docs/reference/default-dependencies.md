@@ -245,8 +245,14 @@ pnpm add -D @howells/lint @howells/typescript-config turbo typescript husky lint
 ### New Next.js UI monorepo
 
 ```bash
-pnpm add -D @howells/lint @howells/typescript-config turbo typescript husky lint-staged tsx vitest storybook @storybook/react-vite @testing-library/react @testing-library/jest-dom @testing-library/user-event @playwright/test
+pnpm add -D @howells/lint @howells/typescript-config turbo typescript husky lint-staged tsx vitest
 pnpm add next react react-dom tailwindcss @tailwindcss/postcss motion lucide-react zod clsx tailwind-merge sonner @tanstack/react-query next-themes date-fns usehooks-ts nuqs agentation @howells/envy
+```
+
+When the repo exports reusable UI, also add Storybook and browser/component test tooling:
+
+```bash
+pnpm add -D storybook @storybook/react-vite @testing-library/react @testing-library/jest-dom @testing-library/user-event @playwright/test
 ```
 
 ### New full-stack product app

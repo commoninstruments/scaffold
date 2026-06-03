@@ -17,7 +17,7 @@ It is not a generic starter guide. It reflects the conventions that are already 
 ## Defaults
 
 - Default repo shape: `pnpm` monorepo, usually with `apps/*` and `packages/*`
-- Default UI stack: Next.js App Router, React 19, Tailwind 4, Radix, Storybook
+- Default UI stack: Next.js App Router, React 19, Tailwind 4, Radix, and Storybook when the repo exports reusable UI
 - Default linting and formatting: Biome via `@howells/lint`
 - Default task runner: Turborepo with cache disabled until a repo proves it is deterministic
 - Default data stack for product apps: Drizzle, Neon, `tRPC`, and React Query
@@ -39,9 +39,9 @@ It is not a generic starter guide. It reflects the conventions that are already 
 - [Agentic Development](./reference/agentic-development.md)
 - [Launch Checklist](./reference/launch-checklist.md)
 
-## Codex Skill
+## Agent Skill
 
-The installable skill lives at `skills/scaffold`. It routes agents through these docs without loading every reference at once.
+The Project Docs are the source of truth. The installable skill at `skills/scaffold` is a distribution surface that routes supported coding assistants through these docs without loading every reference at once.
 
 ## What This Standard Optimizes For
 
@@ -49,5 +49,5 @@ The installable skill lives at `skills/scaffold`. It routes agents through these
 - Fast project setup without re-deciding toolchain basics
 - Correctness over cleverness
 - Shared UI primitives without flattening project identity
-- Clear agent workflows so Arc and Codex remain assets instead of entropy generators
+- Clear agent workflows so Arc and supported coding assistants remain assets instead of entropy generators
 - Reusable skills that stay independent when they solve cross-repo agent problems

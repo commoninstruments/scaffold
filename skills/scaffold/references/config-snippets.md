@@ -60,30 +60,37 @@ Keep local development, CI, and deployment runtimes on Node 24 LTS. Do not use N
 
 ## Default workspace shape
 
-For a full-stack product repo, start here:
+For a full-stack product repo, start with the core shape:
 
 ```text
 apps/
   web/
-  storybook/              # only if shared UI exists
 packages/
   db/
   trpc/                   # typed app API layer
   ui/
   typescript-config/
   tailwind-config/
+  env/                    # when typed env is centralized
   motion/                 # when motion tokens/presets are shared
+```
+
+Add capability packages only when the repo needs them:
+
+```text
+apps/
+  storybook/              # when shared UI exists
+packages/
   auth/                   # when auth is shared
   ai/                     # only for repo-specific logic above @howells/ai
   mastra/                 # when Mastra owns agent/workflow runtime behavior
   agents/                 # when non-Mastra agent behavior is shared
   mcp/                    # when the repo exposes MCP tools or resources
   assets/                 # when assets are shared
-  env/                    # when typed env is centralized
   upload/                 # only if the repo has real upload/media behavior
 ```
 
-This is a starting shape, not a checklist. Do not create empty packages just to satisfy the diagram.
+This is a starting shape, not a checklist. Do not create empty packages just to satisfy either diagram.
 
 ## `pnpm-workspace.yaml`
 
@@ -311,9 +318,9 @@ export const envSchema = defineEnv({
 
 For provider checks, prefer Envy's Vercel or Railway adapters over hand-written shell scripts.
 
-## `.codex/config.toml` for Agentation
+## Assistant MCP config for Agentation
 
-Use this only for repos that want project-local Agentation MCP wiring:
+Use assistant-specific MCP config only for repos that want project-local Agentation MCP wiring. For Codex:
 
 ```toml
 [mcp_servers.agentation]
