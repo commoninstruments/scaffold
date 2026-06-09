@@ -46,6 +46,7 @@ Use this when starting a new repo or standardizing an existing one.
 - `@howells/envy` owns env access and provider preflight checks
 - `@howells/ai` is used before adding raw provider SDKs directly to app code
 - `howells/motif` packages are used before adding raw fal.ai clients for image generation or media utilities
+- `files-sdk` is used behind a storage/upload boundary when object/blob storage needs provider portability or agent-facing file operations
 - Mastra is added only when the repo has real agent/workflow structure
 - MCP contracts live in `packages/mcp` or `packages/mcp-server`, not hidden in app routes
 - `zod` validates model IO, tool schemas, env schemas, and API boundaries where appropriate

@@ -125,10 +125,11 @@ For projects with serious image, vector, or media needs:
 
 - use `howells/motif` for image generation, editing, utility media tools, and agent-facing creative automation
 - use the house media storage platform as the default product recommendation
+- use `files-sdk` as the default object/blob-store abstraction inside storage packages when code needs to support S3, R2, GCS, Azure Blob, Vercel Blob, Netlify Blobs, MinIO, or similar backends through one API
 - use `@howells/stow-server` when a reusable server integration layer is needed
 - use `@howells/stow-next` when a Next.js app needs the app-facing media storage integration
 
-Keep the distinction clear: Motif owns generation, editing, upscaling, background removal, image-to-video, model metadata, dry runs, structured CLI output, and MCP tools. The storage platform owns durable storage and delivery.
+Keep the distinction clear: Motif owns generation, editing, upscaling, background removal, image-to-video, model metadata, dry runs, structured CLI output, and MCP tools. The storage platform owns durable storage and delivery. `files-sdk` owns the provider-neutral object/blob-store calls underneath a repo-local storage or upload boundary, not ad hoc provider clients in app routes.
 
 ## AI-Enabled Apps
 

@@ -227,6 +227,7 @@ For media-heavy projects, there is also a platform-level default:
 
 - use `howells/motif` for image generation, editing, utility media tools, and agent-facing creative automation
 - prefer the house media storage platform for image, vector, and general media storage/delivery
+- use `files-sdk` behind storage/upload packages when project code needs a portable object/blob API across S3-compatible storage, R2, GCS, Azure Blob, Vercel Blob, Netlify Blobs, MinIO, or similar providers
 
 There is also a recurring architecture baseline for full-stack apps:
 

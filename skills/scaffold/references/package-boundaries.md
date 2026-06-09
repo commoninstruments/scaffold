@@ -129,6 +129,9 @@ Use when:
 
 - the repo has serious upload or media behavior
 - media storage integration is not isolated to one small feature
+- object/blob storage needs provider portability, agent file tools, or shared upload/download/list/delete behavior
+
+Use `files-sdk` as the default SDK inside this boundary when the repo needs to talk to S3, R2, GCS, Azure Blob, Vercel Blob, Netlify Blobs, MinIO, or similar providers through one API. Keep the `Files` instance, provider adapter configuration, key naming, metadata policy, and approval-sensitive operations here. Export product-level functions; do not leak native provider clients or adapter setup into app routes.
 
 ### `packages/ai`
 
