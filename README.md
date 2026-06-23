@@ -2,9 +2,17 @@
 
 Opinionated documentation scaffold for starting a new Howells project.
 
-This repo is intentionally docs-first. It captures the shared baseline that is already emerging across my recent active projects.
+This repo is docs-first and now ships a small Next.js surface for browsing the canonical Project Docs. The Markdown in `docs/` remains the source of truth; the app reads from it rather than replacing it.
 
 Start with [docs/README.md](docs/README.md).
+
+## Commands
+
+```sh
+pnpm install
+pnpm dev
+pnpm check
+```
 
 ## Agent Skill
 

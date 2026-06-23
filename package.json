@@ -1,0 +1,38 @@
+{
+  "name": "scaffold",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "howells-oxlint src next.config.ts",
+    "lint:fix": "howells-oxlint src next.config.ts --fix",
+    "format": "howells-oxfmt --write AGENTS.md README.md package.json pnpm-workspace.yaml next.config.ts postcss.config.mjs tsconfig.json src",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm lint && pnpm typecheck && pnpm build"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "4.3.1",
+    "lucide-react": "1.21.0",
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-markdown": "10.1.0",
+    "remark-gfm": "4.0.1",
+    "tailwindcss": "4.3.1"
+  },
+  "devDependencies": {
+    "@howells/lint": "0.5.0",
+    "@howells/typescript-config": "0.1.6",
+    "@types/node": "24.10.2",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "oxfmt": "0.53.0",
+    "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": ">=24.15.0 <25"
+  },
+  "packageManager": "pnpm@11.5.1"
+}
