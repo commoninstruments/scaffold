@@ -310,6 +310,55 @@ export const envSchema = defineEnv({
 
 For provider checks, prefer Envy's Vercel or Railway adapters over hand-written shell scripts.
 
+## Drizzle + Neon db client
+
+Default adapter is `drizzle-orm/neon-http`. The schema lives in `packages/db`; the client is a memoized singleton.
+
+```ts
+// packages/db/src/client.ts
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+import { getDatabaseUrl } from "@your-scope/env";
+import * as schema from "./schema";
+
+let cached: ReturnType<typeof drizzle<typeof schema>> | null = null;
+
+export const getDb = () => {
+  cached ??= drizzle(neon(getDatabaseUrl()), { schema });
+  return cached;
+};
+export type Db = ReturnType<typeof getDb>;
+```
+
+Use `drizzle-orm/neon-serverless` (`Pool` over WebSockets) instead **only** for runtimes that need interactive/session transactions (long-running workers/CLIs); set `neonConfig.poolQueryViaFetch = true` on edge.
+
+```ts
+// drizzle.config.ts
+import "dotenv/config"; // or load env via envy before invoking drizzle-kit
+import { defineConfig } from "drizzle-kit";
+import { getDatabaseUrl } from "./packages/env/src";
+
+export default defineConfig({
+  schema: "./packages/db/src/schema.ts",
+  out: "./drizzle",
+  dialect: "postgresql",
+  dbCredentials: { url: getDatabaseUrl() },
+  strict: true,
+  verbose: true,
+});
+```
+
+Schema-first workflow — `push`, not migration files:
+
+```json
+{
+  "scripts": {
+    "db:push": "envy run local --schema packages/env/src/schema.ts --from .env.local -- drizzle-kit push",
+    "db:studio": "envy run local --schema packages/env/src/schema.ts --from .env.local -- drizzle-kit studio"
+  }
+}
+```
+
 ## Minimal `AGENTS.md`
 
 ```md

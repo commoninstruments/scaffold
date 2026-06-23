@@ -51,10 +51,32 @@ Do not force `tRPC` into:
 The clear default is:
 
 - Postgres
-- Drizzle
-- Neon for serverless-hosted Postgres where that model fits
+- Drizzle (ORM + typed schema)
+- Neon for serverless-hosted Postgres
+- `@neondatabase/serverless` as the driver — never raw `pg`/`node-postgres`, and `postgres.js` only for a concrete long-running-service need
 
-This is one of the strongest repeated patterns in the current portfolio.
+This is one of the strongest repeated patterns in the current portfolio. Use Drizzle from day one — hand-written SQL with manual row typing is not the baseline.
+
+### Connecting Drizzle to Neon (the rule)
+
+Pick the adapter by runtime, not by habit. Both adapters use the same `@neondatabase/serverless` package:
+
+- **Default — `drizzle-orm/neon-http`** (`neon(DATABASE_URL)` → `drizzle(sql, { schema })`). Use for all app data access (Server Components, route handlers, serverless/edge functions) and short-lived scripts. HTTP one-shot queries are lowest-latency for request/response work, are edge-safe, and `db.transaction([...])` still gives atomic batched (non-interactive) writes — which covers almost every write path, including multi-table ingestion.
+- **Escape hatch — `drizzle-orm/neon-serverless`** (`Pool` over WebSockets; set `neonConfig.poolQueryViaFetch = true` on edge). Use **only** when a runtime genuinely needs *interactive* (session) transactions — multi-step logic that branches mid-transaction — or node-postgres compatibility. Typically long-running workers/CLIs. Open and close the pool within the request/process.
+
+Do not mix adapters within one package without a reason, and do not reach for `postgres.js`/`node-postgres` as a default — that is driver sprawl.
+
+### Schema and migrations
+
+- **Schema-first.** The Drizzle schema (`packages/db/src/schema.ts`) is the source of truth.
+- **`drizzle-kit push`** is the workflow for syncing schema to the database. Do not hand-author migration files or runtime DDL. For an existing database, bootstrap the schema once with `drizzle-kit pull`, then own it via push.
+- Schema lives in the first-tier `packages/db` boundary.
+
+### Driver notes (GA `@neondatabase/serverless` ≥ 1.0)
+
+- Requires Node ≥ 19 (all current repos are well past this).
+- Call the neon query function as a **template** (`` sql`…` ``) or via `.query(text, params)` — never as a conventional function `sql('…', [])` (the GA breaking change).
+- Over HTTP, wrap reads/writes in **retry-on-transient-drop** logic; connections can blip during maintenance.
 
 ## Client State
 
