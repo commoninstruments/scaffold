@@ -2,27 +2,161 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
-@theme inline {
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
-  --color-background: oklch(0.985 0.002 95);
-  --color-foreground: oklch(0.18 0.01 95);
-  --color-muted: oklch(0.5 0.012 95);
-  --color-faint: oklch(0.66 0.01 95);
-  --color-border: oklch(0.88 0.008 95);
-  --color-panel: oklch(0.965 0.003 95);
-  --color-accent: oklch(0.48 0.11 35);
+/* ── Design Tokens ─────────────────────── */
+
+:root {
+  --sc-font-sans: var(--font-geist-sans), "Geist", system-ui, sans-serif;
+  --sc-font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --sc-color-canvas: #fafaf9;
+  --sc-color-surface: #ffffff;
 }
 
-* {
-  box-sizing: border-box;
+/* ── Font ──────────────────────────────── */
+
+body {
+  font-family: var(--sc-font-sans);
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-html {
-  background: var(--color-background);
-  color: var(--color-foreground);
+/* ── Theme Overrides ───────────────────── */
+
+@theme {
+  --font-sans: var(--sc-font-sans);
+  --font-mono: var(--sc-font-mono);
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+  --color-fd-background: var(--sc-color-canvas);
+  --color-fd-card: var(--sc-color-surface);
+  --color-fd-popover: var(--sc-color-surface);
+  --color-fd-muted: var(--color-zinc-100);
+  --color-fd-border: color-mix(in oklab, var(--color-zinc-200) 85%, transparent);
+  --color-fd-foreground: var(--color-zinc-950);
+  --color-fd-muted-foreground: var(--color-zinc-500);
+  --color-fd-secondary: var(--color-zinc-100);
+  --color-fd-secondary-foreground: var(--color-zinc-950);
+  --color-fd-accent: color-mix(in oklab, var(--color-zinc-100) 88%, white);
+  --color-fd-accent-foreground: var(--color-zinc-950);
+  --color-fd-primary: var(--color-zinc-950);
+  --color-fd-primary-foreground: var(--color-zinc-50);
+  --color-fd-ring: var(--color-zinc-400);
+}
+
+.dark {
+  --color-fd-background: hsl(0, 0%, 6%);
+  --color-fd-card: hsl(0, 0%, 6%);
+  --color-fd-popover: hsl(0, 0%, 9%);
+  --color-fd-muted: hsl(0, 0%, 12%);
+  --color-fd-border: hsl(0, 0%, 18%);
+  --color-fd-foreground: hsl(0, 0%, 93%);
+  --color-fd-muted-foreground: hsl(0, 0%, 58%);
+  --color-fd-secondary: hsl(0, 0%, 12%);
+  --color-fd-secondary-foreground: hsl(0, 0%, 93%);
+  --color-fd-accent: hsl(0, 0%, 14%);
+  --color-fd-accent-foreground: hsl(0, 0%, 93%);
+  --color-fd-primary: hsl(0, 0%, 93%);
+  --color-fd-primary-foreground: hsl(0, 0%, 8%);
+  --color-fd-ring: hsl(0, 0%, 45%);
+  --sc-color-canvas: hsl(0, 0%, 6%);
+  --sc-color-surface: hsl(0, 0%, 9%);
 }
 
 ::selection {
-  background: color-mix(in oklch, var(--color-accent) 22%, transparent);
+  background: color-mix(in oklab, var(--color-fd-foreground) 14%, transparent);
+  color: inherit;
+}
+
+/* ── Docs Layout Refinements ───────────── */
+
+#nd-page {
+  max-width: 900px;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+  padding-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+#nd-page > h1 {
+  letter-spacing: -0.02em;
+}
+
+#nd-page .prose {
+  color: var(--color-fd-muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.625;
+  --tw-prose-body: var(--color-fd-muted-foreground);
+  --tw-prose-headings: var(--color-fd-foreground);
+  --tw-prose-bold: var(--color-fd-foreground);
+  --tw-prose-links: var(--color-fd-muted-foreground);
+  --tw-prose-counters: var(--color-fd-muted-foreground);
+  --tw-prose-bullets: var(--color-fd-border);
+  --tw-prose-code: var(--color-fd-foreground);
+  --tw-prose-quotes: var(--color-fd-foreground);
+  --tw-prose-quote-borders: var(--color-fd-border);
+  --tw-prose-hr: var(--color-fd-border);
+  --tw-prose-td-borders: var(--color-fd-border);
+  --tw-prose-th-borders: var(--color-fd-border);
+}
+
+#nd-page
+  .prose
+  :where(a:not([data-card])):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: var(--color-fd-muted-foreground);
+  text-decoration-color: var(--color-fd-ring);
+}
+
+#nd-page
+  .prose
+  :where(a:not([data-card]):hover):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: var(--color-fd-foreground);
+}
+
+#nd-sidebar {
+  background-color: var(--color-fd-background);
+}
+
+#nd-sidebar > div:nth-child(2) p {
+  color: var(--color-fd-foreground);
+}
+
+#nd-sidebar > div:nth-child(2) a {
+  color: var(--color-fd-muted-foreground);
+  font-size: 0.875rem;
+}
+
+#nd-sidebar > div:nth-child(2) a[data-active="true"] {
+  color: var(--color-fd-foreground);
+  background-color: var(--color-zinc-200);
+}
+
+.dark #nd-sidebar > div:nth-child(2) a[data-active="true"] {
+  background-color: hsl(0, 0%, 14%);
+}
+
+#nd-toc h3,
+#nd-toc a {
+  color: var(--color-fd-muted-foreground);
+}
+
+#nd-toc a[data-active="true"] {
+  color: var(--color-fd-foreground);
+}
+
+@media (width >= 80rem) {
+  #nd-page {
+    padding-top: 2.5rem;
+  }
 }
