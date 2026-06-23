@@ -1,7 +1,10 @@
 packages: []
 
 allowBuilds:
-  sharp: false
+  esbuild: true
 
 ignoredBuiltDependencies:
   - sharp
+
+onlyBuiltDependencies:
+  - esbuild

@@ -1,0 +1,19 @@
+{
+  "title": "Reference",
+  "defaultOpen": true,
+  "pages": [
+    "stack-decisions",
+    "architecture-defaults",
+    "repo-archetypes",
+    "package-boundaries",
+    "deployment-defaults",
+    "default-dependencies",
+    "config-snippets",
+    "ui-projects",
+    "ui-baseline",
+    "shared-package-candidates",
+    "agent-workflow",
+    "agentic-development",
+    "launch-checklist"
+  ]
+}

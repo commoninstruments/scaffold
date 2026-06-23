@@ -1,3 +1,8 @@
+---
+title: "New Project Docs"
+description: "This docs set is the canonical starting point for a new Howells project."
+---
+
 # New Project Docs
 
 This docs set is the canonical starting point for a new Howells project.

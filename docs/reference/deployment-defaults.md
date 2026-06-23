@@ -1,3 +1,8 @@
+---
+title: "Deployment Defaults"
+description: "This is the default deployment logic inferred from your active repos."
+---
+
 # Deployment Defaults
 
 This is the default deployment logic inferred from your active repos.

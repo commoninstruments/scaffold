@@ -1,3 +1,8 @@
+---
+title: "Stack Decisions"
+description: "These are the current default decisions for new TypeScript product work and shared config repos."
+---
+
 # Stack Decisions
 
 These are the current default decisions for new TypeScript product work and shared config repos.

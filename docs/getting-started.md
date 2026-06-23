@@ -1,3 +1,8 @@
+---
+title: "Getting Started"
+description: "Use this sequence when creating a new repo."
+---
+
 # Getting Started
 
 Use this sequence when creating a new repo.

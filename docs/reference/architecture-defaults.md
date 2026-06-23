@@ -1,3 +1,8 @@
+---
+title: "Architecture Defaults"
+description: "These are the recurring architecture choices across your active repos."
+---
+
 # Architecture Defaults
 
 These are the recurring architecture choices across your active repos.

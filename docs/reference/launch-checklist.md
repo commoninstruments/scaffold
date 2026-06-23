@@ -1,3 +1,8 @@
+---
+title: "Launch Checklist"
+description: "Use this when starting a new repo or standardizing an existing one."
+---
+
 # Launch Checklist
 
 Use this when starting a new repo or standardizing an existing one.

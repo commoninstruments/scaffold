@@ -1,3 +1,8 @@
+---
+title: "Repo Archetypes"
+description: "Most new repos should start from one of these shapes."
+---
+
 # Repo Archetypes
 
 Most new repos should start from one of these shapes.

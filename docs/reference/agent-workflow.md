@@ -1,3 +1,8 @@
+---
+title: "Agent Workflow"
+description: "This is the baseline for repos that will be worked on with coding assistants, Arc, and reusable specialist skills. Supported assistants should include Codex, Claude Code, and Cursor through platform-specific wrappers or commands."
+---
+
 # Agent Workflow
 
 This is the baseline for repos that will be worked on with coding assistants, Arc, and reusable specialist skills. Supported assistants should include Codex, Claude Code, and Cursor through platform-specific wrappers or commands.

@@ -1,10 +1,17 @@
 {
   "extends": "@howells/typescript-config/nextjs",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "collections/*": ["./.source/*"]
+    }
+  },
   "include": [
     "next-env.d.ts",
-    "next.config.ts",
+    "source.config.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
+    ".source/**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": ["docs", "node_modules", "skills"]

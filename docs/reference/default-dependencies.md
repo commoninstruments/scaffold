@@ -1,3 +1,8 @@
+---
+title: "Default Dependencies"
+description: "This is the package baseline inferred from recent active repos."
+---
+
 # Default Dependencies
 
 This is the package baseline inferred from recent active repos.

@@ -1,3 +1,8 @@
+---
+title: "Bundled UI Baseline"
+description: "This directory vendors the deleted UI-system files recovered from the old `~/Sites/patternmode` history at commit `1ffeb6ddb9d5d449a3618f3b73f79b93590cd463^`."
+---
+
 # Bundled UI Baseline
 
 This directory vendors the deleted UI-system files recovered from the old `~/Sites/patternmode` history at commit `1ffeb6ddb9d5d449a3618f3b73f79b93590cd463^`.

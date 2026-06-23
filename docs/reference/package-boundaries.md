@@ -1,3 +1,8 @@
+---
+title: "Package Boundaries"
+description: "These are the package boundaries that keep recurring across your serious monorepos."
+---
+
 # Package Boundaries
 
 These are the package boundaries that keep recurring across your serious monorepos.

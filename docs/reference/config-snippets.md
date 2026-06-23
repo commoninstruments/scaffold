@@ -1,3 +1,8 @@
+---
+title: "Config Snippets"
+description: "These are the canonical starting snippets for a new repo."
+---
+
 # Config Snippets
 
 These are the canonical starting snippets for a new repo.

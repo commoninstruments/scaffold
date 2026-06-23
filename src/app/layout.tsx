@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
+import { RootProvider } from "fumadocs-ui/provider/next";
 
 import "./globals.css";
 
@@ -28,8 +29,14 @@ interface RootLayoutProps {
 }
 
 const RootLayout = ({ children }: RootLayoutProps) => (
-  <html className={`${geistSans.variable} ${geistMono.variable}`} lang="en">
-    <body>{children}</body>
+  <html
+    className={`${geistSans.variable} ${geistMono.variable}`}
+    lang="en"
+    suppressHydrationWarning
+  >
+    <body className="flex min-h-screen flex-col">
+      <RootProvider>{children}</RootProvider>
+    </body>
   </html>
 );
 
